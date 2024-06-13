@@ -1,0 +1,95 @@
+\documentclass[a4paper,12pt]{article}
+
+%te paczki zapewniają język polski
+\usepackage[utf8]{inputenc}
+%\usepackage[T1]{fontenc}
+\usepackage{polski}
+
+\usepackage{indentfirst} %pierwsza linia jest z wcięciem (w ang nie, stąd potrzeba tej paczki)
+\usepackage{perpage} %the perpage package
+\MakePerPage{footnote} %restartuje numerowanie footnotes
+
+%potrzebna do wszelkich matematycznych rzeczy (macierze, specjalne znaki zbiorów, itp.)
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{adjustbox}
+%\usepackage{framed} %pozwala na ramki
+
+\usepackage{graphicx} %grafika i obrazy
+\usepackage{wrapfig} %do umiejscawiania grafiki
+\usepackage{color} %kolorki
+\usepackage{geometry} %jakies dodatkowe ustawienia
+\usepackage{array} %pionowe centrowanie tekstu w tabelach -> P{}
+\usepackage{tabularx} %dostowany tabular, ktory automatycznie łamie zbyt długie komórki
+\usepackage{float}
+\usepackage{xurl} %dlugie linki
+\usepackage[sorting=none, maxnames=4]{biblatex} %bibliografia
+\addbibresource{bibliography.bib}
+\usepackage{subcaption} %podpisy podwykresow
+\usepackage{titlesec}
+%definicja wymiarów stron
+\geometry{hmargin={2cm, 2cm}, height=10.0in}
+
+\usepackage{hyperref} %spis treści
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\mmathbf}[1]{$\mathbf{#1}$}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\newenvironment{conditions*}
+  {
+  \noindent gdzie:
+  \par
+  \vspace{\abovedisplayskip}\noindent
+   \tabularx{\columnwidth}{>{$}l<{$} @{${}-{}$} >{\raggedright\arraybackslash}X}}
+  {\endtabularx\par\vspace{\belowdisplayskip}}
+  
+\usepackage[linesnumbered]{algorithm2e} 
+% K0D
+
+% \usepackage[skip=1pt]{caption}
+% \captionsetup[subfigure]{aboveskip=0pt}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+% my parg
+\newcommand{\myparagraph}[1]{\paragraph{#1}\mbox{}\\}
+
+\usepackage{amsmath, amssymb, latexsym}
+\usepackage{sidecap}
+ 
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing}
+ \usepackage[mode=build]{standalone}
+\usepackage{import}
+
+
+\let\oldref\ref
+\renewcommand{\ref}[1]{(\oldref{#1})} % () przy referencjach
+
+\newcommand{\myref}[1]{(\ref{#1})} % () przy referencjach

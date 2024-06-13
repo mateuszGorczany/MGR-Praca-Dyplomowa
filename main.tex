@@ -1,0 +1,42 @@
+\input{settings.tex}
+
+\begin{document}
+\import{./}{frontpage} % strona powitalna
+\newpage
+\textbf{Podziękowania}\\\\
+\textbf{Dedications}\\\\
+\textit{Pracę dedykuję rodzicom za nieocenione wsparcie podczas całego procesu edukacji.}
+\newpage
+\tableofcontents %tworzy spis treści
+\newpage
+\section{Introduction}
+% Opisać cel wykonania generacji
+
+% Motywacja i cel = 2 strony
+\input{introduction}
+\newpage
+% ~\newpage
+% Opis modelu 
+% W jaki sposób i co badamy
+% 7 stron
+\input{implementation}
+\input{analysis/models}
+\setlength\intextsep{0.3cm}
+
+\newpage
+\section{Results analysis}
+\input{analysis/analysis}
+% Jakie uzyskano wyniki
+
+% z innych metod, szumów, artefaktów ... etc. 
+% 10 stron ok.
+% 2 strony
+\newpage
+\input{summary.tex}
+\input{whats_next}
+\newpage
+\section{Dodatek}
+\input{Appendix}
+\newpage
+\printbibliography[heading=bibintoc,title=Bibliography]
+\end{document}
