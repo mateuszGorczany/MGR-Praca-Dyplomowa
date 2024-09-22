@@ -1,0 +1,17 @@
+\subsection{Motivation}
+Prostate cancer is one of the leading diseases in developed countries. There are hundreds of thousands of men diagnosed with this condition, and many of them die from it every year. Early detection and prevention can lead to a significant reduction in deaths. Today, modern organ imaging techniques are employed to identify areas where the tumor occurred. One of them is Computer Tomography (CT). 
+
+Artificial intelligence is currently one of the most popular topics. Rapid advances in this field could support early cancer detection or identification of lesion areas, where human assessment of medical screenings is essential. AI can assist professionals in identifying them.
+
+However, artificial intelligence, especially deep learning, needs a lot of data to become an effective aid tool. There are not many data available to train such models. It is caused by numerous factors, but the main ones are privacy of medical data and the lack of a standardized way of collecting medical data for AI purposes from multiple sources, hospitals around the world.
+
+As a result, the concept of generating synthetic medical screening data for the purpose of AI training emerged, which is the subject of this thesis. 
+
+\subsection{Objectives}
+In this paper, we will focus on specific data augmentation techniques that may help to expand existing prostate cancer CT scan datasets with new samples. Next, these datasets can be used to train artificial intelligence to recognize scans with potential cancer or detect lesion areas. 
+\subsection{Methodology}
+The research methodology will follow a systematic approach to achieve the aims of the thesis. First, a diverse set of prostate CT scans from the dataset provided by the faculty will be processed. Next, a range of AI-based augmentation techniques will be implemented, including GANs, VAEs and VQGANS. These techniques will be applied to the original dataset to create an extended, augmented dataset. The performance of the models will be evaluated using metrics such as L1, L2, SSIM, LPIPS and FID.
+\subsection{Limitations and scope}
+The study is subjected only to pelvic computed tomography scans.  
+Secondly, it is important to recognize the ethical considerations and potential biases involved in the generation of synthetic medical data. Care must be taken to ensure that the augmented images do not introduce artifacts that could lead to misdiagnosis in clinical settings. In addition, the computational resources required for advanced AI-based augmentation techniques may limit the scale of our experiments and the complexity of the models that we can robustly train and evaluate. 
+Finally, while the goal is to create realistic and clinically relevant augmented images, the validation of these synthetic datasets in real-world clinical scenarios is beyond the scope of this work and represents an important area for future research.

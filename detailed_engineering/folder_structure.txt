@@ -1,0 +1,32 @@
+├── Makefile           <- Makefile with convenience commands like `make experiment-monai-autoencoder`
+├── README.md          <- README for developers using this project.
+├── data               <- Data for the project.
+│   ├── input          <- Raw input data for the project.
+│   ├── processed      <- Manually preprocessed data.
+│   └── output         <- Model outputs if a processing through model is done.
+├── experiments             <-  Configurations for running experiments. User is able to set up different training strategies, like multiple GPU usage or single GPU. It allows also to setup different model configurations and training configurations.
+│   ├── monai_autoencoder.yaml          
+│   └── diffuser.yaml            
+├── models             <- Trained models saved as files and their checkpoints saved during training. 
+│
+├── notebooks          <- Jupyter notebooks for data & model analysis.
+│
+├── pyproject.toml     <- Python project configuration file using Rye's structure.
+│
+├── reports            <- Training side-effects like generated plots, gifs, metadata etc.
+│
+├── requirements.txt   <- The requirements file with all external dependencies and their versions.
+│
+└── ct-data-augmentation        <- Source code for use in this project.
+    │
+    ├── __init__.py             <- Makes a directory a Python module
+    │
+    ├── main.py                 <- Main script that is runned as CLI and enables user to train different models with different configurations. It allows also to retrain a model and evaluate it.
+    │
+    ├── data.py                 <- Code for loading dataset.
+    │
+    ├── models                
+    │   ├── wgan.py
+    │   ├── another_model.py    <- Models implementation.
+    │
+    └── utils.py                <- Utility functions that are commonly used in model's implementation like data transformations, metrics logging, visualizations.

@@ -1,0 +1,47 @@
+\begin{tikzpicture}[
+    box/.style={draw, minimum width=2cm, minimum height=3cm, text width=1.8cm, align=center},
+    smallbox/.style={draw, minimum width=1.5cm, minimum height=1.2cm, text width=1.3cm, align=center},
+    arrow/.style={->, >=latex, thick},
+    label/.style={font=\small}
+]
+
+% Components
+\node[circle, draw] (input) {Input $x$};
+\node[box, right=1cm of input] (encoder) {Encoder};
+
+% Latent space
+\node[right=2cm of encoder] (latent) {};
+\node[circle, draw, above=0.3cm of latent] (mu) {$\mu$};
+\node[circle, draw, below=0.3cm of latent] (sigma) {$\sigma$};
+\node[circle, draw, minimum size=1cm, right=1cm of latent] (z) {$z$};
+
+\node[box, right=1cm of z] (decoder) {Decoder};
+\node[circle, draw, right=1cm of decoder] (output) {Output $\hat{x}$};
+
+% Reparameterization trick
+\node[circle, draw, fill=white, minimum size=0.5cm, above=0.5cm of z] (epsilon) {$\epsilon$};
+
+% Connections
+\draw[arrow] (input) -- (encoder);
+\draw[arrow] (encoder) -- (mu);
+\draw[arrow] (encoder) -- (sigma);
+\draw[arrow] (mu) -- (z);
+\draw[arrow] (sigma) -- (z);
+\draw[arrow] (epsilon) -- (z);
+\draw[arrow] (z) -- (decoder);
+\draw[arrow] (decoder) -- (output);
+
+% Labels
+\node[label, below=0.2cm of input] {High-dimensional};
+% \node[label, above=0.2cm of mu] {Latent space};
+\node[label, below=0.2cm of sigma] {Latent space};
+\node[label, above=0.2cm of epsilon] {$\sim \mathcal{N}(0,1)$};
+\node[label, below=0.2cm of output] {Reconstructed};
+
+% % KL Divergence
+% \draw[<->, >=latex, bend left=30] ($(encoder.north east)+(0.2,0.2)$) to node[above, font=\small] {KL Divergence} ($(mu.north west)+(-0.2,0.2)$);
+
+% Reconstruction Loss
+\draw[<->, >=latex, bend right=30] ($(input.south west)+(1,-0.3)$) to node[below, font=\small] {Reconstruction Loss} ($(output.south east)+(-1.3,-0.2)$);
+
+\end{tikzpicture}

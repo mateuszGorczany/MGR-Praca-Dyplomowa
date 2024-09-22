@@ -1,0 +1,35 @@
+% \usepackage{tikz}
+
+\begin{tikzpicture}[
+    node distance = 1cm and 2cm,
+    diamond/.style = {diamond, draw, minimum size=1cm},
+    circle/.style = {circle, draw, minimum size=1cm}
+]
+
+% Original graph
+\node[diamond] (f1) {$f$};
+\node[circle] (z1) [below=of f1] {$z$};
+\node[diamond] (mu1) [below left=of z1] {$\mu$};
+\node[diamond] (sigma1) [below right=of z1] {$\sigma$};
+
+\draw[->] (mu1) -- (z1);
+\draw[->] (sigma1) -- (z1);
+\draw[->] (z1) -- (f1);
+
+\node[below=0.5cm of z1] {Original};
+
+% Reparametrized graph
+\node[diamond] (f2) [right=4cm of f1] {$f$};
+\node[diamond] (z2) [below=of f2] {$z$};
+\node[diamond] (mu2) [below left=of z2] {$\mu$};
+\node[diamond] (sigma2) [below=of z2] {$\sigma$};
+\node[circle] (epsilon) [below right=of z2] {$\varepsilon$};
+
+\draw[->] (mu2) -- (z2);
+\draw[->] (sigma2) -- (z2);
+\draw[->] (epsilon) -- (z2);
+\draw[->] (z2) -- (f2);
+
+\node[below=0.5cm of sigma2] {Reparametrized};
+
+\end{tikzpicture}

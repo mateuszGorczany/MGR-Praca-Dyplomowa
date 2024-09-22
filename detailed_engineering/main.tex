@@ -1,0 +1,67 @@
+\subsection{Programming setup}
+Data augmentation using deep learing is a highly complicated process, so choosing the right tooling plays a crucial role in it. Lack of knowledge about modern technologies that help with programming environment setup may lead to many hours of additional time spent on the project that are not specifically related to the core analysis. In order to reduce the time spent on configuration errors, modern state-of-the-art technologies were employed to mitigate this issue.  
+
+\input{detailed_engineering/programming_setup}
+\newpage
+\subsection{Hardware}
+Training neural networks demands substantial computational resources, particularly for the latest architecture models. These models typically consume significant memory, making it impractical to train them on personal computers. To address this, two Nvidia Quadro RTX 8000 GPUs, each equipped with 48GB of RAM, were utilized. 
+
+\subsection{Hardware utilisation - Multiple GPU utilisation techniques}
+Training on a single GPU is straightforward. However, when a single card falls short, the challenge of leveraging multiple GPUs arises. The solution varies based on the underlying reason for employing multiple GPUs.
+\paragraph{Distributed data parallel}\mbox{} \\
+If a single GPU can handle training a neural network but you wish to speed up the process with an additional GPU, the Distributed Data Parallel (DDP) technique can be used. This approach distributes the neural network model and data across both GPUs, allowing for concurrent training of two model instances. However, during the backpropagation phase, the gradients are synchronized and averaged.
+
+This technique was used to train most of the models presented later, since it sped up the training twice. 
+
+\paragraph{Distributed data parallel sharded}\mbox{} \\
+If one GPU is unable to fit into its memory model, then the distributed data parallel shared technique can be used to solve the issue. Splits the model layers between cards and then uses cross-device communication techniques to train the model. However, this solution slows down the training due to the overhead of cross-device communication.
+
+\newpage 
+\subsection{Training monitoring}
+Training of neural networks often takes a lot of time - hours, days, weeks and sometime even months. It is crucial to monitor it in order not to waste resources on unsuccessful training. Whats more - when there are many models that are trained or there are many attempts of training it is easy to loose track of what has been accomplished, which models were already trained and what were the results. 
+Monitoring enables the researcher to have visibility of important metrics for the model. Thus, unsuccessful training may be stopped ahead of time. It also helps to visualize training progress, model output and makes it possible to share the results with other researchers during the training. 
+\paragraph{Tensorboard}
+Tensorboard is an open source project that enables user to locally monitor training of a neural networks. It makes it possible to:
+- gather metrics,
+- visualize model outputs,
+- organize model trainings in the friendly user interface.
+
+\paragraph{Wandb}
+Wandb is a commercial product that allows to monitor training of Machine Learning models, especially deep learning ones. W skład monitoringu wchodzi:
+- gathering statistics and metrics
+- comparison of statistics,
+- hardware monitoring,
+- configuration monitoring. 
+- reports of training. 
+
+It can be synchronised with Tensorobard. The metrics logged there can be viewed in the WanDB website. They give researchers from the academia free resources to use. 
+
+Thanks to the tool it was possible to monitor whether model converges or not.
+
+\newpage
+\subsection{Dataset}
+\paragraph{Data source}
+\paragraph{Data format - DICOM}
+- NII.GZ
+- 
+\paragraph{Data characteristics}
+- count
+- value range
+- number of layers
+\paragraph{Data transformations}
+
+\newpage
+\subsection{Chosen approaches}
+% \subsubsection{WGAN}
+% \subsubsection{Autoencoder}
+\subsubsection{VAE + DDPM}
+\input{detailed_engineering/monai_ddpm}
+\newpage
+\subsubsection{German VQGAN}
+\input{detailed_engineering/german_vqgan}
+\newpage
+\subsubsection{Medical Diffusion VQGAN + DDPM}
+\input{detailed_engineering/medical_diffusion}
+
+
+% \input{monai}

@@ -3,40 +3,130 @@
 \begin{document}
 \import{./}{frontpage} % strona powitalna
 \newpage
-\textbf{Podziękowania}\\\\
 \textbf{Dedications}\\\\
-\textit{Pracę dedykuję rodzicom za nieocenione wsparcie podczas całego procesu edukacji.}
+\textit{I dedicate this work to my parents for their invaluable support throughout the entire education process.}
 \newpage
 \tableofcontents %tworzy spis treści
 \newpage
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|p{0.5\linewidth}|}
+        \hline
+        Symbols & Description\\
+        \hline
+        $x$ & original input data, a CT scan, \\
+        $\hat{x}$ & reconstructed input data or generated data, a CT scan,\\
+        $z$ & compressed representation of $x$,\\
+        $[0,1]^{1xHxWxD}$ & input data space, where $x$ is located,\\
+        $\theta(\cdot)$ & deep learning model used to solve the classification problem, i.e., a function from the family $F$, such that $f \in F: \mathbf{R}^{n1xn2xn3...} \mapsto \mathbf{R}^{n1xn2xn3...}$,\\
+        $L_f(\cdot,\cdot)$ & loss function, specifying the difference between the input $x$ and reconstruction result $\hat{x}$; for example, the mean squared error,\\
+        $||\cdot||_p$ & p-norm,\\
+        $\nabla$ & gradient,\\
+        $epoch$ & one iteration over whole dataset,\\
+    \hline
+    \end{tabular} 
+    \caption{Description of notation.}
+    \label{tab:notation_table}
+\end{table}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|p{0.5\linewidth}|}
+        \hline
+        $H$ & \textbf{H}eight of an image (layer),\\
+        $W$ & \textbf{W}idth of an image (layer),\\
+        $B$ & \textbf{B}atch size - number of scans grouped together,\\
+        $D$ & \textbf{D}epth - number of layers in a scan,\\
+        $T$ & Time, equivalence of $D$, used in a video format,\\
+        $C$ & Image \textbf{C}hannels, scans are grey so $C=1$,\\
+        $(H,W)$ & Image - Matrix dimensions (2D Tensor) that represents an image (scan's one layer),\\
+        $(C,H,W,D)$ & Scan - (\textbf{C}hannels, Image, \textbf{D}epth) - Tensor dimensions that represents one scan,\\
+        $(1,H,W,D)$ & Grey scan,\\
+        $(B,C,H,W,D)$ & B*Scans - Tensor dimensions that represents \textbf{B}atch of scans,\\
+        $(B,C,T,H,W)$ & B*Videos - Tensor dimensions that represents a video,\\
+    \hline
+    \end{tabular} 
+    \caption{Description of image notation.}
+    \label{tab:image_notation_table}
+\end{table}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|p{0.5\linewidth}|}
+        \hline
+        Acronyms & Description\\
+        \hline
+        $CNN$ & Convolutional Neural Network, \\
+        $DDP$ & Distributed Data Parallel,\\
+        $L1$ & ...\\
+        $AE$ & Autoencoder, \\
+        $VAE$ & Variational Autoencoder,\\
+        $VQ-VAE$ & Vector Quantizied - Variational Autoencoder,\\
+        $DDPM$ & Denoising Diffusion Probabilistic Models,\\
+    \hline
+    \end{tabular} 
+    \caption{Description of notation.}
+    \label{tab:acronyms_table}
+\end{table}
+
+
+\newpage
 \section{Introduction}
+\input{introduction/main}
+\newpage
+\section{Background}
+\input{background/main}
+\newpage
+\section{Concept engineering}
+\input{concept_engineering/main}
+
+\newpage
+\section{Detailed engineering}
+\input{detailed_engineering/main}
+
+% \newpage
+% \section{Technical feasibility}
+% \subsection{Strengths}
+% \subsection{Weaknesses}
+% \subsection{Opportunities}
+% \subsection{Threats}
+
+% \newpage
+% \section{Economical feasibility}
+
+% \newpage
+% \section{Regulations and legal aspect}
+
+\newpage
+\section{Summary}
+\input{summary}
+
+\newpage
+\section{Annex}
 % Opisać cel wykonania generacji
 
 % Motywacja i cel = 2 strony
-\input{introduction}
+% \include{introduction}
 \newpage
 % ~\newpage
 % Opis modelu 
 % W jaki sposób i co badamy
 % 7 stron
-\input{implementation}
-\input{analysis/models}
+% \import{./}{./implementation}
 \setlength\intextsep{0.3cm}
 
-\newpage
-\section{Results analysis}
-\input{analysis/analysis}
+% \newpage
+% \section{Results analysis}
 % Jakie uzyskano wyniki
 
 % z innych metod, szumów, artefaktów ... etc. 
 % 10 stron ok.
 % 2 strony
 \newpage
-\input{summary.tex}
-\input{whats_next}
+% \import{./}{summary.tex}
 \newpage
-\section{Dodatek}
-\input{Appendix}
+% \section{Dodatek}
+% \input{Appendix}
 \newpage
 \printbibliography[heading=bibintoc,title=Bibliography]
 \end{document}

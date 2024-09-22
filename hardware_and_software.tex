@@ -1,0 +1,82 @@
+\section{Development Environment}
+
+
+\begin{enumerate}
+    \item Hardware
+    \item Versioning - Git
+    \item Versioning - Github
+    \item Development Tool - Python
+    \itme Project Structure
+    \item Package manager - Rye
+    \item System Package Manager - Devbox
+    \item Direnv
+    \item Pytorch
+    \item Cuda
+    \item Pytorch Lightning
+    \item Omegaconf
+    \item Observability - WanDB
+    \item Observability - Tensorboard
+\end{enumerate}
+
+
+Setting up an efficient Python development environment is crucial for successful project execution. This section covers various tools and techniques to enhance your Python development workflow, particularly focusing on system dependencies management, package management, environment variables handling, and multi-GPU training for machine learning.
+
+\subsection{Devbox: Nix-Based System Dependencies Management}
+
+\textbf{Devbox} is a powerful tool based on the Nix package manager, designed for managing system dependencies, such as command-line interfaces (CLIs) and drivers, in a reproducible manner. It offers the following features:
+
+\begin{itemize}
+    \item \textbf{Reproducibility}: Devbox ensures that all dependencies are installed in a consistent environment, making it easier to replicate environments across different machines.
+    \item \textbf{CUDA Support}: For machine learning projects that require GPU acceleration, Devbox can be configured to install specific CUDA versions, ensuring compatibility with frameworks like PyTorch.
+    \item \textbf{Isolation}: It isolates system dependencies from your global environment, preventing conflicts and ensuring that your development environment remains clean and organized.
+\end{itemize}
+
+\subsection{Rye: Modern Python Package Manager}
+
+\textbf{Rye} is a modern package manager for Python development, designed to simplify project setup and dependency management. It brings several advantages over traditional tools like pip and virtualenv:
+
+\begin{itemize}
+    \item \textbf{Automatic Dependency Resolution}: Rye automatically resolves and installs dependencies, including managing different versions of the same package across projects.
+    \item \textbf{Project Scaffolding}: It provides tools for quickly setting up new Python projects with pre-configured templates.
+    \item \textbf{Integrated Virtual Environments}: Rye manages virtual environments automatically, eliminating the need to manually create and activate them.
+    \item \textbf{PEP 517/518 Compliance}: Rye adheres to modern Python packaging standards, ensuring compatibility with the broader ecosystem.
+\end{itemize}
+
+\subsection{Direnv: Environment Variable Management}
+
+\textbf{Direnv} is a tool for managing environment variables on a per-directory basis. This is particularly useful in Python projects that require different environment variables depending on the context (e.g., development, testing, or production environments). Key features include:
+
+\begin{itemize}
+    \item \textbf{Automatic Loading}: Direnv automatically loads environment variables when you enter a directory and unloads them when you leave, ensuring that your shell environment is always in sync with your project.
+    \item \textbf{Security}: Direnv only loads environment variables from trusted files, preventing accidental execution of malicious code.
+    \item \textbf{Integration with Devbox and Rye}: Direnv can work alongside Devbox and Rye to provide a seamless development experience by ensuring that the right environment variables are set for the right tools.
+\end{itemize}
+
+\subsection{PyTorch and PyTorch Lightning: Multi-GPU Training}
+
+\textbf{PyTorch} is a widely-used deep learning framework that provides a flexible platform for building and training neural networks. For large-scale training tasks, especially those requiring multi-GPU setups, \textbf{PyTorch Lightning} offers an abstraction layer that simplifies the process.
+
+\subsubsection{Multi-GPU Training with PyTorch}
+
+PyTorch natively supports multi-GPU training using several techniques:
+
+\begin{itemize}
+    \item \textbf{Data Parallelism}: Distributes the input data across multiple GPUs, with each GPU processing a portion of the data in parallel. This method is straightforward and easy to implement using PyTorch's \texttt{DataParallel} module.
+    \item \textbf{Distributed Data Parallelism (DDP)}: A more efficient approach compared to traditional data parallelism, DDP reduces inter-GPU communication overhead by parallelizing computations and synchronizing gradients only when necessary.
+\end{itemize}
+
+\subsubsection{PyTorch Lightning for Simplified Multi-GPU Training}
+
+PyTorch Lightning builds on top of PyTorch to provide a more organized and cleaner interface for training models, particularly in complex scenarios such as multi-GPU training:
+
+\begin{itemize}
+    \item \textbf{Automated Device Management}: Lightning automatically handles the distribution of models and data across multiple GPUs, allowing you to focus on model development without worrying about device-specific code.
+    \item \textbf{Flexible Training Options}: Lightning supports various types of training strategies, including:
+    \begin{itemize}
+        \item \textbf{Single-GPU Training}: Default option, suitable for smaller datasets and models.
+        \item \textbf{Multi-GPU Training}: Leverages multiple GPUs on a single machine or across multiple machines for faster training.
+        \item \textbf{TPU Training}: Supports training on Tensor Processing Units (TPUs) for even greater computational efficiency.
+        \item \textbf{Distributed Training}: Ideal for large-scale training across multiple nodes, making it suitable for big data and complex models.
+    \end{itemize}
+    \item \textbf{Callback System}: Allows you to hook into various stages of the training process (e.g., checkpoints, early stopping) with minimal code, ensuring that your model training is both robust and efficient.
+\end{itemize}

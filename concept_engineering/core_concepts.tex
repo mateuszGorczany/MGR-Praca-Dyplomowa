@@ -1,0 +1,40 @@
+\paragraph{CNN - Convolutional Neural Network}\mbox{}\\
+
+Convolutional neural networks are used to extract intermediate representations of the input. They take advantage of convolutional filters with weights that are learned during training. Such convolutional filters create a convolutional layer. An image passed through a first convolutional layer creates the feature maps. Convolutional layers can be stacked together, creating in the result a convolutional network.
+Convolutional layers are usually combined with subsampling techniques, such as pooling. 
+
+CNNs, however, are prone to inductive bias. They will always try to find a pattern in an image that they learned during training, even if it is not present.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\linewidth]{concept_engineering/Typical_cnn.png}
+    \caption{Caption}
+    \label{fig:cnn}
+\end{figure}
+
+
+\paragraph{Autoencoders - VAE/VQAE}\mbox{}\\
+\begin{figure}[H]
+    \centering
+    \input{concept_engineering/autoencoder}
+    \caption{Visualization of autoencoder. Circles are tensors, rectangles neural networks.}
+    \label{fig:autoencoder}
+\end{figure}
+\indent Autoencoder is an architecture of deep learning model that consists of two deep neural networks - Encoder and Decoder. The task of the encoder is to transform the input into latent representation of the input. Usually it compresses it, for example to a vector or smaller matrix/tensor. Decoder then takes such latent representation and transforms it back to its original form. 
+
+Such an architecture could remind one of the SVD algorithm. It is not a coincidence - an autoencoder is built of linear layers and activations perform a singular value decomposition.   
+
+Loss function between input $x$ and output $\hat{x}$:
+L1, L2, MSE.
+
+\paragraph{U-Net}\mbox{}\\
+\indent U-Net is a special type of convolutional neural network, originally built for the task of image segmentation, especially in medical imaging. Its architecture resembles a U-shape, similar to an autoencoder. The encoder on the left side reduces the input image size while capturing significant features. The right side increases resolution and performs tasks like segmentation, utilizing the features extracted by the encoder via "skip connections." Despite the similarity, U-Net is not considered an autoencoder due to the use of skip connections.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\linewidth]{concept_engineering/unet/U-net.png}
+    \caption{U-Net architecture.}
+    \label{fig:unet}
+\end{figure}
+
+

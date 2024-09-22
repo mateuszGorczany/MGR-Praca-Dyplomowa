@@ -2,8 +2,9 @@
 
 %te paczki zapewniają język polski
 \usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
 %\usepackage[T1]{fontenc}
-\usepackage{polski}
+% \usepackage{polski}
 
 \usepackage{indentfirst} %pierwsza linia jest z wcięciem (w ang nie, stąd potrzeba tej paczki)
 \usepackage{perpage} %the perpage package
@@ -44,12 +45,33 @@
   {\endtabularx\par\vspace{\belowdisplayskip}}
   
 \usepackage[linesnumbered]{algorithm2e} 
+\usepackage{tikz-cd}
+\usepackage{tikz}
+\usetikzlibrary{positioning, shapes, shapes.geometric, arrows.meta, calc}
+
+
 % K0D
 
 % \usepackage[skip=1pt]{caption}
 % \captionsetup[subfigure]{aboveskip=0pt}
-\usepackage{listings}
+\usepackage{listings ,pmboxdraw}
+\lstset{
+  basicstyle=\ttfamily,
+  columns=fullflexible,
+  keepspaces,
+  literate=
+  {┐}{\textSFiii}1%
+  {└}{\textSFii}1%
+  {┴}{\textSFvii}1%
+  {┬}{\textSFvi}1%
+  {├}{\textSFviii}{1}%
+  {─}{\textSFx}1%
+  {│}{\textSFxi}1%
+  {┼}{\textSFv}1,
+}
+
 \usepackage{xcolor}
+\usepackage{svg}
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}

@@ -1,0 +1,35 @@
+\begin{tikzpicture}[
+    node distance = 1cm and 2cm,
+    every node/.style = {draw, minimum size=0.8cm},
+    % square/.style = {sides=4},
+    square/.style = {regular polygon,regular polygon sides=4},
+    arr/.style = {->, >=stealth}
+]
+
+% Original graph
+\node[square] (f1) at (0,0) {$f$};
+\node[circle] (z1) at (0,-1.5) {$z$};
+\node[square] (mu1) at (-1,-3) {$\mu$};
+\node[square] (sigma1) at (1,-3) {$\sigma$};
+
+\draw[arr] (mu1) -- (z1);
+\draw[arr] (sigma1) -- (z1);
+\draw[arr] (z1) -- (f1);
+
+\node[below=0.5cm of sigma1, draw=none] {Original};
+
+% Reparametrized graph
+\node[square] (f2) at (5,0) {$f$};
+\node[square] (z2) at (5,-1.5) {$z$};
+\node[square] (mu2) at (4,-3) {$\mu$};
+\node[square] (sigma2) at (5,-3) {$\sigma$};
+\node[circle] (epsilon) at (6,-3) {$\varepsilon$};
+
+\draw[arr] (mu2) -- (z2);
+\draw[arr] (sigma2) -- (z2);
+\draw[arr] (epsilon) -- (z2);
+\draw[arr] (z2) -- (f2);
+
+\node[below=0.5cm of sigma2, draw=none] {Reparametrized};
+
+\end{tikzpicture}

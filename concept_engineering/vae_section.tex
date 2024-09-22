@@ -1,0 +1,132 @@
+\begin{figure}[H]
+    \centering
+    \input{concept_engineering/vae}
+    \caption{Visualization of Variational Autoencoder. Circles are tensors, rectangles are neural networks.}
+    \label{fig:vae}
+\end{figure}
+
+\indent The main issue with autoencoders in the context of synthetic data generation is that we do not know what values should be assigned to the layer $z$ and passed through decoder in order to obtain meaningful results. The Variational Autoencoder addresses it.
+This model extends the standard autoencoder by linking it with probability concepts: mean and standard deviation. VAE learns not only to create a compressed representation of the data, but also a distribution over that representation. This makes VAEs capable of generating new data samples that are similar to those in the training set. Thus, VAE is a suitable choice for image generation, data augmentation, and even anomaly detection.
+
+\begin{figure}[H]
+    \centering
+    \input{concept_engineering/vae_mlp}
+    \caption{Visualization of a simple VAE.}
+    \label{fig:vae-simple}
+\end{figure}
+
+The figure[\ref{fig:vae-simple}] shows detailed visualization of a simple Variational Autoencoder. It is worth noticing that the encoder $E$ has two outputs, $\mu$ and $\sigma$, which produce $z$ using the reparameterization trick\footnote{\url{https://www.baeldung.com/cs/vae-reparameterization}}.
+
+\begin{equation}
+    z = \mu + \sigma\cdot\epsilon,
+\end{equation}
+
+where $\epsilon\sim\mathcal{N}(0,1)$.
+
+\paragraph{Loss Function:}\mbox{}\\
+The VAE loss is a combination of:
+\begin{enumerate}
+\item \textbf{Reconstruction Loss}, which ensures how well the reconstructed image matches the original input image, for example $L1$, $L2$, $MSE$,
+\item \textbf{KL Divergence Loss} that ensures the latent space follows a Gaussian distribution.
+\end{enumerate}
+
+\begin{equation}
+    L = L_{reconstruction} + \mathbb{KL}(q(z | x) || p(z)),
+\end{equation}
+
+where 
+\begin{itemize}
+    \item $\mathbb{KL}$ - Kullback-Leibler divergence\footnote{\url{https://en.wikipedia.org/wiki/Kullback\%E2\%80\%93Leibler_divergence}}, measures how much two distributions differ from each other,
+    \item $q(z | x) = \mathcal{N}(\mu, \sigma)$ - probability distribution of the latent representation $z$, in other words probability distribution of endocers output,
+    \item $p(z) = \mathcal{N}(0,1)$ - expected probability distribution.
+\end{itemize}
+
+After substituting probabilities, the loss $L$ becomes\footnote{Broader explanation and Pytorch toy example can be found here \url{https://avandekleut.github.io/vae/}.}
+\begin{equation}
+    L = L_{reconstruction} + \mathbb{KL}(\mathcal{N}(\mu,\sigma), \mathcal{N}(0,1)).
+\end{equation}
+
+The difference between two Gaussians can be calculated using the identity\cite{7449}. 
+
+\begin{equation}
+    \mathbb{KL}\left( \mathcal{N}(\mu, \sigma) \parallel \mathcal{N}(0, 1) \right) = \sum_{x \in X} \left( \sigma^2 + \mu^2 - \log \sigma - \frac{1}{2} \right)
+\end{equation}
+
+
+% Train the VAE on prostate CT scans to learn an efficient latent space representation.
+\paragraph{Generation of CT scans}\mbox{}\\
+
+To generate new CT scans, we could sample the Gaussian noise tensor of shape $z$, which follows the normal distribution, and then pass it through the decoder.
+If the model is properly trained, the decoder should reconstruct this latent representation into a realistic synthetic CT image. 
+
+However, it is not guaranteed that the learned distribution $q(z)$ is always similar to $\mathbf{N}(0,1)$, especially when the $\mathbb{KL}$ loss is far from $0$. To mitigate this issue, aggregated posterior probability could be used. For example, by passing the entire dataset through the encoder and averaging resulted in $\mu$s to $\overline{\mu}$ and $\sigma$s to $\overline{\sigma}$ and then sampling from $\mathcal{N}(\overline{\mu}, \overline{\sigma})$. The alternative solution is to train another neural network that would learn the distribution of the latent representation of $z$ - $q(z)$. Such a neural network could be a Latent Diffusion Model described in the previous section.
+
+% ### Key Differences from Traditional Autoencoders
+
+% ### VAE Structure
+
+% 1. **Encoder (Inference Network)**: The encoder maps an input \( x \) to a latent representation, but instead of outputting a single value, it outputs parameters of a probability distribution, typically a Gaussian distribution with a mean \( \mu \) and a variance \( \sigma^2 \). This is achieved by splitting the encoder's output into two parts:
+
+% \[
+% q(z|x) = \mathcal{N}(z; \mu(x), \sigma^2(x))
+% \]
+
+% where:
+% - \( \mu(x) \) is the mean of the latent distribution for input \( x \),
+% - \( \sigma^2(x) \) is the variance of the latent distribution for input \( x \),
+% - \( z \) is the latent variable sampled from the distribution \( q(z|x) \).
+
+% 2. **Reparameterization Trick**: To allow backpropagation through the stochastic sampling process, VAEs use the reparameterization trick. Instead of sampling \( z \) directly from \( \mathcal{N}(\mu(x), \sigma^2(x)) \), a random variable \( \epsilon \sim \mathcal{N}(0, 1) \) is sampled, and \( z \) is computed as:
+
+% \[
+% z = \mu(x) + \sigma(x) \cdot \epsilon
+% \]
+
+% This trick makes the sampling process differentiable, enabling gradient-based optimization.
+
+% 3. **Decoder (Generative Network)**: The decoder reconstructs the input data from the latent variable \( z \). The decoder maps \( z \) back to the data space, producing a reconstruction \( \hat{x} \). Similar to traditional autoencoders, this is done through a neural network.
+
+% ### VAE Loss Function
+
+% The loss function in a VAE consists of two terms:
+
+% 1. **Reconstruction Loss**: This measures how well the decoder can reconstruct the input from the latent variable \( z \). It is typically the Mean Squared Error (MSE) or binary cross-entropy, depending on the nature of the data:
+
+% \[
+% L_{reconstruction} = \mathbb{E}_{q(z|x)} [||x - \hat{x}||^2]
+% \]
+
+% 2. **KL Divergence (Regularization Term)**: The second term ensures that the learned latent distribution \( q(z|x) \) is close to a chosen prior distribution \( p(z) \) (usually a standard normal distribution \( \mathcal{N}(0, 1) \)). This regularization term is the Kullback-Leibler (KL) divergence between the approximate posterior \( q(z|x) \) and the prior \( p(z) \):
+
+% \[
+% D_{KL}(q(z|x) || p(z)) = \frac{1}{2} \sum_{i=1}^n (1 + \log(\sigma_i^2) - \mu_i^2 - \sigma_i^2)
+% \]
+
+% The total VAE loss is a combination of the reconstruction loss and the KL divergence:
+
+% \[
+% L_{VAE} = L_{reconstruction} + D_{KL}(q(z|x) || p(z))
+% \]
+
+% This loss encourages the model to reconstruct the input data accurately while ensuring that the latent variables follow the prior distribution.
+
+% ### Applications
+
+% 1. **Data Generation**: By sampling latent vectors from the learned distribution, VAEs can generate new data points similar to those in the training set.
+   
+% 2. **Anomaly Detection**: VAEs can detect anomalies by measuring the reconstruction error for unseen data; higher reconstruction errors often indicate anomalies.
+   
+% 3. **Data Augmentation**: VAEs can be used to generate additional synthetic data for training, improving model generalization.
+
+% 4. **Latent Space Exploration**: The continuous and smooth latent space learned by VAEs allows for meaningful interpolations between data points.
+
+% ---
+
+% **References**:
+% 1. Kingma, D. P., & Welling, M. (2013). *Auto-Encoding Variational Bayes*. arXiv preprint arXiv:1312.6114.
+% 2. Doersch, C. (2016). *Tutorial on Variational Autoencoders*. arXiv preprint arXiv:1606.05908.
+% \input{concept_engineering/vae}
+% Reparametrization trick
+
+
+% \input{concept_engineering/reparametrization_trick}

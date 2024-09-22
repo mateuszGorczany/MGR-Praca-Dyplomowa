@@ -1,0 +1,39 @@
+\begin{tikzpicture}[
+    box/.style={draw, minimum width=2cm, minimum height=3cm, text width=1.8cm, align=center},
+    smallbox/.style={draw, minimum width=1.5cm, minimum height=1.2cm, text width=1.8cm, align=center},
+    arrow/.style={->, >=latex, thick},
+    label/.style={font=\small},
+    % circle/.style={draw, align=center}
+]
+
+% Components
+\node[circle, draw] (input) {Input $x$};
+\node[box, right=1cm of input] (encoder) {Encoder};
+
+% Latent space
+\node[right=2cm of encoder] (latent) {};
+\node[circle, draw, right=1cm of encoder, font=\small, align=center,text width=2cm] (quantized) {Quantized \\ z};
+\node[smallbox, below=0.3cm of quantized] (codebook) {Codebook};
+
+\node[box, right=2cm of latent] (decoder) {Decoder};
+\node[circle, draw, right=1cm of decoder] (output) {Output $\hat{x}$};
+
+% Connections
+\draw[arrow] (input) -- (encoder);
+\draw[arrow] (encoder) -- (quantized);
+\draw[arrow] (codebook) -- (quantized);
+\draw[arrow] (quantized) -- (decoder);
+\draw[arrow] (decoder) -- (output);
+
+% Labels
+\node[label, below=0.2cm of input] {High-dimensional};
+\node[label, below=0.2cm of codebook] {Latent space};
+\node[label, below=0.2cm of output] {Reconstructed};
+
+% Reconstruction Loss
+\draw[<->, >=latex, bend right=30] ($(input.south west)+(1,-0.3)$) to node[below, font=\small] {Reconstruction Loss} ($(output.south east)+(-1.3,-0.2)$);
+
+% Commitment Loss
+\draw[<->, >=latex, bend left=40] ($(encoder.north east)+(0.2,0.2)$) to node[above=0.1cm, font=\small] {Commitment Loss} ($(quantized.north west)+(-0.2,0.2)$);
+
+\end{tikzpicture}
