@@ -1,4 +1,80 @@
 
+\paragraph{VQVAE}\mbox{}\\
+\paragraph{Model configruation}\mbox{}\\
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Parameter} & \textbf{Value} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{Training}} \\
+\hline
+Accelerator & GPU \\
+\hline
+Devices & 2 \\
+\hline
+Precision & 32 \\
+\hline
+Strategy & DDP \\
+\hline
+Maximum Epochs & 10001 \\
+\hline
+\multicolumn{2}{|c|}{\textbf{Model}} \\
+\hline
+Input Channels & 1 \\
+\hline
+Output Channels & 1 \\
+\hline
+Embedding Channels & 8 \\
+\hline
+Number of Embeddings & 16384 \\
+\hline
+Spatial Dimensions & 3 \\
+\hline
+Hidden Channels & [32, 64, 128, 256] \\
+\hline
+Kernel Sizes & [3, 3, 3, 3] \\
+\hline
+Strides & [1, 2, 2, 2] \\
+\hline
+Embedding Loss Weight & 1 \\
+\hline
+Beta & 1 \\
+\hline
+Loss Function & L1 \\
+\hline
+Deep Supervision & 0 \\
+\hline
+Use Attention & [False, False, True, True] \\
+\hline
+Normalization & Group (num\_groups: 4, affine: True) \\
+\hline
+Sample Every N Epochs & 20 \\
+\hline
+Learning Rate & 5e-6 \\
+\hline
+\multicolumn{2}{|c|}{\textbf{Dataset}} \\
+\hline
+Caching & Disk \\
+\hline
+Path & /ravana/d3d\_work/micorl/data/ct\_images\_prostate\_32fixed/ \\
+\hline
+Image Size & 128 \\
+\hline
+Number of Slices & 32 \\
+\hline
+Window Width & 400 \\
+\hline
+Window Level & 60 \\
+\hline
+\end{tabular}
+\caption{Parameters for the Training Configuration}
+\label{table:training_params}
+\end{table}
+
+\paragraph{Training}\mbox{}\\
+
 \begin{figure}[H]
 \minipage{0.49\textwidth}
 \includegraphics[width=\linewidth]{detailed_engineering/German VQVAE/charts/train_l1.png}

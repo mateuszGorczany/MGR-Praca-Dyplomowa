@@ -1,3 +1,93 @@
+\paragraph{Model configuration}\mbox{}\\
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Parameter} & \textbf{Value} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{Training}} \\
+\hline
+Batch Size & 1 \\
+\hline
+Seed & 42 \\
+\hline
+Epochs & 15000 \\
+\hline
+Training Ratio & 0.9 \\
+\hline
+Number of Nodes & 1 \\
+\hline
+Gradient Clip Value & 1.0 \\
+\hline
+Metric to Monitor & val/recon\_loss \\
+\hline
+Metric Mode & Min \\
+\hline
+Device & CUDA \\
+\hline
+\multicolumn{2}{|c|}{\textbf{Model}} \\
+\hline
+Image Channels & 1 \\
+\hline
+Embedding Dimension & 8 \\
+\hline
+Number of Codes & 16384 \\
+\hline
+Number of Hidden Layers & 16 \\
+\hline
+Learning Rate & 5e-6 \\
+\hline
+Downsample Factors & [2, 2, 2] \\
+\hline
+Discriminator Channels & 64 \\
+\hline
+Discriminator Layers & 3 \\
+\hline
+Discriminator Iteration Start & 10000 \\
+\hline
+Discriminator Loss Type & Hinge \\
+\hline
+Image GAN Weight & 1.0 \\
+\hline
+Video GAN Weight & 1.0 \\
+\hline
+L1 Weight & 4.0 \\
+\hline
+GAN Feature Weight & 4.0 \\
+\hline
+Perceptual Weight & 4.0 \\
+\hline
+I3D Feature & False \\
+\hline
+Restart Threshold & 1.0 \\
+\hline
+No Random Restart & False \\
+\hline
+Normalization Type & Group \\
+\hline
+Padding Type & Replicate \\
+\hline
+Number of Groups & 32 \\
+\hline
+\multicolumn{2}{|c|}{\textbf{Dataset}} \\
+\hline
+Caching & Disk \\
+\hline
+Path & /ravana/d3d\_work/micorl/data/ct\_images\_prostate\_32fixed/ \\
+\hline
+Image Size & 128 \\
+\hline
+Number of Slices & 32 \\
+\hline
+Window Width & 400 \\
+\hline
+Window Level & 60 \\
+\hline
+\end{tabular}
+\caption{Parameters for the Meta VQGAN}
+\label{table:meta_vqgan_params}
+\end{table}
+
 \paragraph{Training}\mbox{}\\
 
 \begin{figure}[H]

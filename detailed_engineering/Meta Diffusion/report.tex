@@ -1,4 +1,95 @@
+\paragraph{Model configuration}\mbox{}\\
 
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Parameter} & \textbf{Value} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{Training}} \\
+\hline
+Batch Size & 5 \\
+\hline
+Seed & 42 \\
+\hline
+Epochs & 15000 \\
+\hline
+Training Ratio & 0.9 \\
+\hline
+Number of Nodes & 1 \\
+\hline
+Number of Devices & 1 \\
+\hline
+Device & CUDA \\
+\hline
+Float precision & 32 \\
+\hline
+Metric to Monitor & val/loss \\
+\hline
+Metric Mode & Min \\
+\hline
+\multicolumn{2}{|c|}{\textbf{Model}} \\
+\hline
+Learning Rate & 0.0001 \\
+\hline
+Loss Type & L1 \\
+\hline
+VQGAN Checkpoint Path & ./models/meta_vqgan/checkpoints/meta_vqgan-v5.ckpt \\
+\hline
+Probability of Focus Present & 0.0 \\
+\hline
+Gradient Scaler Enabled & False \\
+\hline
+Focus Present Mask & Null \\
+\hline
+Max Gradient Norm & Null \\
+\hline
+\multicolumn{2}{|c|}{\textbf{EMA Configuration}} \\
+\hline
+Decay & 0.995 \\
+\hline
+Start Step & 2000 \\
+\hline
+Update Every Step & 10 \\
+\hline
+\multicolumn{2}{|c|}{\textbf{Scan Parameters}} \\
+\hline
+Image Size & 64 \\
+\hline
+Depth Size & 16 \\
+\hline
+Number of Channels & 8 \\
+\hline
+\multicolumn{2}{|c|}{\textbf{Scheduler Parameters}} \\
+\hline
+Timesteps & 300 \\
+\hline
+\multicolumn{2}{|c|}{\textbf{UNet Parameters}} \\
+\hline
+Dimension Multipliers & [1, 2, 4, 8] \\
+\hline
+\multicolumn{2}{|c|}{\textbf{Dataset Configuration}} \\
+\hline
+Caching & Disk \\
+\hline
+Path & /ravana/d3d_work/micorl/data/ct_images_prostate_32fixed/ \\
+\hline
+Image Size & 128 \\
+\hline
+Number of Slices & 32 \\
+\hline
+Window Width & 400 \\
+\hline
+Window Level & 60 \\
+\hline
+\end{tabular}
+\caption{Parameters for the Meta Diffuser}
+\label{table:meta_diffuser_params}
+\end{table}
+
+
+
+\paragraph{Training}\mbox{}\\
 \begin{figure}[H]
 \minipage{0.49\textwidth}
 \includegraphics[width=\linewidth]{detailed_engineering/Meta Diffusion/charts/train_loss.png}
