@@ -1,95 +1,25 @@
-\documentclass{article}
 
-\usepackage{graphicx}
-\usepackage{booktabs}
-\usepackage{longtable}
-\usepackage{tabu}
-\usepackage{listings}
-\usepackage{hyperref}
-\usepackage{tcolorbox}
 
-\setlength\parindent{0pt}
+In this attempt instead of creating noise from $\sim\mathcal{N}(0,1)$, the noise was generated from $N(\mu, \sigma)$ where $\mu$ is the mean of the training data $z_{\mu}$ and $\sigma$ is the mean of $z_{\sigma}$ obtained from the training data set (25 samples).
 
-\title{Monai Diffusion - Attempt 2}
-
-\author{%
-gorczany
-}
-
-\begin{document}
-
-\maketitle
-
-In this attempt instead of creating noise from ~N(0,1), the noise was generated from N(\mu, \sigma)  , where \mu   is mean of training data z_{\mu} and \sigma is mean of z_{\sigma} obtained from the training dataset (25 samples).
-\section{Section 1}
-
-\begin{figure}[!htb]
+\begin{figure}[H]
 \minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-4-Panel-0-e4v3vri6t}
+\includegraphics[width=\linewidth]{detailed_engineering/Monai Diffusion - Attempt 2/charts/step_loss.png}
 \caption{}
 \endminipage\hfill
 \minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-4-Panel-1-ulnd0akfj}
+\includegraphics[width=\linewidth]{detailed_engineering/Monai Diffusion - Attempt 2/charts/val_loss.png}
 \caption{}
 \endminipage
 \end{figure}
 
-\begin{figure}[!htb]
-\minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-4-Panel-2-xcacaksit}
+\begin{figure}[H]
+% \minipage{0.49\textwidth}
+\includegraphics[width=\linewidth]{detailed_engineering/Monai Diffusion - Attempt 2/charts/generation.png}
 \caption{}
-\endminipage\hfill
-\minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-4-Panel-3-dn8bpp6rt}
-\caption{}
-\endminipage
+% \endminipage\hfill
+% \minipage{0.49\textwidth}
+% \includegraphics[width=\linewidth]{charts/Section-4-Panel-3-dn8bpp6rt}
+% \caption{}
+% \endminipage
 \end{figure}
-
-\begin{figure}[!htb]
-\minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-4-Panel-4-z2xepgyu7}
-\caption{}
-\endminipage\hfill
-\minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-4-Panel-5-4t8ldmpb8}
-\caption{}
-\endminipage
-\end{figure}
-
-\begin{figure}[!htb]
-\minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-6-Panel-0-ugk4n34o8}
-\caption{}
-\endminipage\hfill
-\minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-6-Panel-1-aydb4wfzs}
-\caption{}
-\endminipage
-\end{figure}
-
-\begin{figure}[!htb]
-\minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-6-Panel-2-669971clf}
-\caption{}
-\endminipage\hfill
-\minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-6-Panel-3-15w7ztexh}
-\caption{}
-\endminipage
-\end{figure}
-
-\begin{figure}[!htb]
-\minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-6-Panel-4-u1sno469v}
-\caption{}
-\endminipage\hfill
-\minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-6-Panel-5-t9fu03nde}
-\caption{}
-\endminipage
-\end{figure}
-
-\nocite{*}
-\bibliographystyle{unsrt}
-\bibliography{bibliography}
-\end{document}

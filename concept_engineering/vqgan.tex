@@ -1,5 +1,4 @@
-VQGAN proposed in \cite{Esser_2021_CVPR} combines GANS, VQVAE, transformers, and a diffusion model.
-
+VQGAN proposed in \cite{Esser_2021_CVPR} is a hybrid model that combines VQVAE's structured latent space with GANs. VQGAN can create high-quality images by using GANs to make textures and details look more realistic.
 % This technique, in comparison to the direct use of diffusion models to 3D data, allows one to train a model using less computational resources and sampling from compressed latent space that has an abstract representation of the input.
 
 \begin{figure}[H]
@@ -9,25 +8,25 @@ VQGAN proposed in \cite{Esser_2021_CVPR} combines GANS, VQVAE, transformers, and
     \label{fig:vqgan-diagram}
 \end{figure}
 
-VQGAN is a hybrid model that combines VQVAE's structured latent space with GANs. VQGAN can create high-quality images by using GANs to make textures and details look more realistic.
+VQGAN has also a transformer part, which is trained to learn connections between embeeding vectors. It is useful for generating images from text. In case of data augmentation it is not necessary, so this part will be omitted.
 
 \paragraph{Loss function}\mbox{}\\
 
 The loss function for VQGAN combines VQVAE and GAN losses:
 
 \begin{itemize}
-    \item \textbf{VQVAE loss}: Reconstruction, Commitment and Codebook losses,
+    \item \textbf{VQVAE loss}: \sout{Reconstruction}, Commitment and Codebook losses,
     \item \textbf{Adversarial Loss}: The GAN component introduces a discriminator that tries to distinguish between real and synthetic images, pushing the generator to create more realistic images.
-    \item Perceptual similarity loss: ensures the generated image matches the real image in terms of higher-level features, most commonly LPIPS\footnote{\url{https://github.com/richzhang/PerceptualSimilarity}} is used for this puprpose.
+    \item \textbf{Perceptual similarity loss} instead of Reconstruction loss: ensures the generated image matches the real image in terms of higher-level features, most commonly LPIPS\footnote{\url{https://github.com/richzhang/PerceptualSimilarity}} is used for this puprpose.
 \end{itemize}
 
 
-the optimal compression target $Q^{\star}$ is expressed by VQVAE loss\eqref{loss_vq} and GAN loss\eqref{loss_gan} combined together in the formula
+The optimal compression target $Q^{\star}$ is expressed by VQVAE loss\eqref{loss_vq} and GAN loss\eqref{loss_gan} combined together in the formula
 \begin{equation}
     Q^{\star} = \text{arg min}_{E,G,Z} \text{max}_D \mathbb{E}_{x~p(x)} [\underbrace{L_{VQ}(E, G, Z)}_{\text{VQVAE loss}} + \lambda\underbrace{L_{GAN}(N, D)}_{\text{adversarial loss}}],
 \end{equation}
 
-where $\lambda$ is the scaling factor.
+where $\lambda$ is the scaling factor. It is important to note that reconstruction loss from the $L_{VQ}$ formula\eqref{loss_vq} - $||x-\hat{x}||^2_2$ is calculated as perceptual loss using LPIPS, not this formula. 
 % \begin{equation}
 %     \mathcal{L}_{GAN}(N,D) = [\log D(x) + log(1-D(\hat{x}))]
 % \end{equation}

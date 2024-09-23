@@ -1,6 +1,6 @@
 # W&B LaTeX Source
 
-This directory was generated from the report named [German VQVAE](https://wandb.ai/deformer/ct-images/reports/German-VQVAE--Vmlldzo5Mjk1NjQ2/edit).
+This directory was generated from the report named [German VQVAE 2](https://wandb.ai/deformer/ct-images/reports/Untitled-Report--Vmlldzo5NDU3MzU0/edit?firstReport&runsetFilter).
 
 All charts are rendered as high resolution PNG's in the **charts** directory.  The tables in
 this report were generated from the pinned columns in the open runsets.  The underlying data

@@ -1,6 +1,6 @@
 # W&B LaTeX Source
 
-This directory was generated from the report named [Meta VQGAN](https://wandb.ai/deformer/ct-images/reports/Meta-VQGAN--Vmlldzo5Mjk1Njg1/edit).
+This directory was generated from the report named [Untitled Report](https://wandb.ai/deformer/ct-images/reports/Untitled-Report--Vmlldzo5NDU2NzU1/edit?firstReport&runsetFilter).
 
 All charts are rendered as high resolution PNG's in the **charts** directory.  The tables in
 this report were generated from the pinned columns in the open runsets.  The underlying data

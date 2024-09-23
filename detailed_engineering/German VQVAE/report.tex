@@ -1,145 +1,46 @@
-\documentclass{article}
 
-\usepackage{graphicx}
-\usepackage{booktabs}
-\usepackage{longtable}
-\usepackage{tabu}
-\usepackage{listings}
-\usepackage{hyperref}
-\usepackage{tcolorbox}
-
-\setlength\parindent{0pt}
-
-\title{German VQVAE}
-
-\author{%
-gorczany
-}
-
-\begin{document}
-
-\maketitle
-
-\section{Section 1}
-
-\begin{figure}[!htb]
+\begin{figure}[H]
 \minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-2-Panel-0-ixrmsnhop}
+\includegraphics[width=\linewidth]{detailed_engineering/German VQVAE/charts/train_l1.png}
 \caption{}
 \endminipage\hfill
 \minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-2-Panel-1-hia63j2ok}
+\includegraphics[width=\linewidth]{detailed_engineering/German VQVAE/charts/val_l1.png}
 \caption{}
 \endminipage
 \end{figure}
 
-\begin{figure}[!htb]
+\begin{figure}[H]
 \minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-2-Panel-2-tyfdv20b9}
+\includegraphics[width=\linewidth]{detailed_engineering/German VQVAE/charts/train_l2.png}
 \caption{}
 \endminipage\hfill
 \minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-2-Panel-3-bmr158ule}
+\includegraphics[width=\linewidth]{detailed_engineering/German VQVAE/charts/val_l2.png}
 \caption{}
 \endminipage
 \end{figure}
 
-\begin{figure}[!htb]
+\begin{figure}[H]
 \minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-2-Panel-4-zut3f3yjr}
+\includegraphics[width=\linewidth]{detailed_engineering/German VQVAE/charts/train_ssim.png}
 \caption{}
 \endminipage\hfill
 \minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-2-Panel-5-4hrqybg78}
+\includegraphics[width=\linewidth]{detailed_engineering/German VQVAE/charts/val_ssim.png}
 \caption{}
 \endminipage
 \end{figure}
 
-\begin{figure}[!htb]
-\minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-4-Panel-0-21tatats6}
-\caption{}
-\endminipage\hfill
-\minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-4-Panel-1-qa03cqfza}
-\caption{}
-\endminipage
+
+
+
+\paragraph{Results}\mbox{}\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{detailed_engineering/German VQVAE/charts/best_german_vqvae.png}
+    \caption{The best quality achieved reconstruction, epoch 8499, step 10540. Top - input, middle - reconstruction, bottom their difference}
+    \label{fig:german_vqvae_best}
 \end{figure}
 
-\begin{figure}[!htb]
-\minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-4-Panel-2-ttwf001oc}
-\caption{}
-\endminipage\hfill
-\minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-4-Panel-3-nq9x4yrzn}
-\caption{}
-\endminipage
-\end{figure}
-
-\begin{figure}[!htb]
-\minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-4-Panel-4-9i9rt31w8}
-\caption{}
-\endminipage\hfill
-\minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-4-Panel-5-6v52jcg5b}
-\caption{}
-\endminipage
-\end{figure}
-
-\begin{figure}[!htb]
-\minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-8-Panel-0-dn8bpp6rt}
-\caption{}
-\endminipage\hfill
-\minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-8-Panel-1-z2xepgyu7}
-\caption{}
-\endminipage
-\end{figure}
-
-\begin{figure}[!htb]
-\minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-8-Panel-2-4t8ldmpb8}
-\caption{}
-\endminipage
-\end{figure}
-
-\begin{figure}[!htb]
-\minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-10-Panel-0-ugk4n34o8}
-\caption{}
-\endminipage\hfill
-\minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-10-Panel-1-aydb4wfzs}
-\caption{}
-\endminipage
-\end{figure}
-
-\begin{figure}[!htb]
-\minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-10-Panel-2-669971clf}
-\caption{}
-\endminipage\hfill
-\minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-10-Panel-3-15w7ztexh}
-\caption{}
-\endminipage
-\end{figure}
-
-\begin{figure}[!htb]
-\minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-10-Panel-4-u1sno469v}
-\caption{}
-\endminipage\hfill
-\minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-10-Panel-5-t9fu03nde}
-\caption{}
-\endminipage
-\end{figure}
-
-\nocite{*}
-\bibliographystyle{unsrt}
-\bibliography{bibliography}
-\end{document}

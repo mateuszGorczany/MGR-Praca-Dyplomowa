@@ -1,145 +1,69 @@
-\documentclass{article}
 
-\usepackage{graphicx}
-\usepackage{booktabs}
-\usepackage{longtable}
-\usepackage{tabu}
-\usepackage{listings}
-\usepackage{hyperref}
-\usepackage{tcolorbox}
-
-\setlength\parindent{0pt}
-
-\title{Meta VQGAN}
-
-\author{%
-gorczany
-}
-
-\begin{document}
-
-\maketitle
-
-\section{Section 1}
-
-\begin{figure}[!htb]
+\begin{figure}[H]
 \minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-2-Panel-0-pa3cwqa5x}
-\caption{}
+\includegraphics[width=\linewidth]{detailed_engineering/Meta VQGAN/charts/Section-2-Panel-13-1qhe42yar.png}
+\caption{Reconstruction loss during the training.}
 \endminipage\hfill
 \minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-2-Panel-1-jbcmgv41c}
-\caption{}
+\includegraphics[width=\linewidth]{detailed_engineering/Meta VQGAN/charts/Section-4-Panel-3-hkj1c12xb.png}
+\caption{Reconstruction loss during the validation.}
 \endminipage
+\caption{Reconstruction loss during the training and the validation. Lower is better.}
 \end{figure}
 
-\begin{figure}[!htb]
+\begin{figure}[H]
 \minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-2-Panel-2-txrju1n9h}
-\caption{}
+\includegraphics[width=\linewidth]{detailed_engineering/Meta VQGAN/charts/Section-2-Panel-11-4ox8mpc2c.png}
+\caption{Perceptual loss during the training.}
 \endminipage\hfill
 \minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-2-Panel-3-ae3byph87}
-\caption{}
+\includegraphics[width=\linewidth]{detailed_engineering/Meta VQGAN/charts/Section-4-Panel-2-2k8ixubhi.png}
+\caption{Perceptual loss during the validation.}
 \endminipage
+\caption{Perceptual loss during the training and the validation. Lower is better.}
 \end{figure}
 
-\begin{figure}[!htb]
+\begin{figure}[H]
 \minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-2-Panel-4-7viug95gl}
-\caption{}
+\includegraphics[width=\linewidth]{detailed_engineering/Meta VQGAN/charts/Section-2-Panel-13-1qhe42yar.png}
+\caption{Commitment loss during the training.}
 \endminipage\hfill
 \minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-2-Panel-5-i03qz8hpw}
-\caption{}
+\includegraphics[width=\linewidth]{detailed_engineering/Meta VQGAN/charts/Section-4-Panel-3-hkj1c12xb.png}
+\caption{Commitment loss during the validation.}
 \endminipage
+\caption{Commitment loss during the training and the validation. Lower is better.}
 \end{figure}
 
-\begin{figure}[!htb]
+\begin{figure}[H]
 \minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-4-Panel-0-9utd8c9z0}
-\caption{}
+\includegraphics[width=\linewidth]{detailed_engineering/Meta VQGAN/charts/Section-2-Panel-1-5nrgzgmoj.png}
+\caption{Perplexity during the training.}
 \endminipage\hfill
 \minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-4-Panel-1-njiwngfn7}
-\caption{}
+\includegraphics[width=\linewidth]{detailed_engineering/Meta VQGAN/charts/Section-4-Panel-1-njiwngfn7.png}
+\caption{Perplexity during the validation.}
 \endminipage
+\caption{Codebook utilisation during the training and the validation. Higher is better.}
 \end{figure}
 
-\begin{figure}[!htb]
-\minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-4-Panel-2-2k8ixubhi}
-\caption{}
-\endminipage\hfill
-\minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-4-Panel-3-hkj1c12xb}
-\caption{}
-\endminipage
-\end{figure}
 
-\begin{figure}[!htb]
-\minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-8-Panel-0-dn8bpp6rt}
-\caption{}
-\endminipage\hfill
-\minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-8-Panel-1-z2xepgyu7}
-\caption{}
-\endminipage
-\end{figure}
-
-\begin{figure}[!htb]
-\minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-8-Panel-2-4t8ldmpb8}
-\caption{}
-\endminipage\hfill
-\minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-8-Panel-3-qw10gqg3p}
-\caption{}
-\endminipage
-\end{figure}
-
-\begin{figure}[!htb]
-\minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-8-Panel-4-2c2ya0kws}
-\caption{}
-\endminipage
-\end{figure}
-
-\begin{figure}[!htb]
-\minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-10-Panel-0-ugk4n34o8}
-\caption{}
-\endminipage\hfill
-\minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-10-Panel-1-aydb4wfzs}
-\caption{}
-\endminipage
-\end{figure}
-
-\begin{figure}[!htb]
-\minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-10-Panel-2-669971clf}
-\caption{}
-\endminipage\hfill
-\minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-10-Panel-3-15w7ztexh}
-\caption{}
-\endminipage
-\end{figure}
-
-\begin{figure}[!htb]
-\minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-10-Panel-4-u1sno469v}
-\caption{}
-\endminipage\hfill
-\minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{charts/Section-10-Panel-5-t9fu03nde}
-\caption{}
-\endminipage
-\end{figure}
-
-\nocite{*}
-\bibliographystyle{unsrt}
-\bibliography{bibliography}
-\end{document}
+\paragraph{Evaluation}\mbox{}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{Metric} & VAE & VQVAE1 & Medical Diffusion VQVAE & \textbf{LDM} \\
+\hline
+$\overline{L1}$ & 0.0309 & 0.0212 & 0.0144 & 0.0845 \\
+\hline
+$\overline{L2}$ & 0.0043 & 0.0023 & 0.0007 & 0.0270 \\
+\hline
+$\overline{SSIM}$ & 0.8690 & 0.9399 & 0.9795 & 0.5954 \\
+\hline
+$\overline{LPIPS}$ & 2.2485 & 1.3820 & 0.8898 & 3.3926 \\
+\hline
+\end{tabular}
+\caption{Mean metrics of the model on the whole dataset as inputs and their reconstructions.}
+\label{table:metrics}
+\end{table}
