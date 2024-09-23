@@ -1,3 +1,4 @@
+\paragraph{Training}\mbox{}\\
 
 \begin{figure}[H]
 \minipage{0.49\textwidth}
@@ -47,23 +48,12 @@
 \caption{Codebook utilisation during the training and the validation. Higher is better.}
 \end{figure}
 
+\paragraph{Results}\mbox{}\\
 
-\paragraph{Evaluation}\mbox{}
-\begin{table}[h!]
-\centering
-\begin{tabular}{|c|c|c|c|c|}
-\hline
-\textbf{Metric} & VAE & VQVAE1 & Medical Diffusion VQVAE & \textbf{LDM} \\
-\hline
-$\overline{L1}$ & 0.0309 & 0.0212 & 0.0144 & 0.0845 \\
-\hline
-$\overline{L2}$ & 0.0043 & 0.0023 & 0.0007 & 0.0270 \\
-\hline
-$\overline{SSIM}$ & 0.8690 & 0.9399 & 0.9795 & 0.5954 \\
-\hline
-$\overline{LPIPS}$ & 2.2485 & 1.3820 & 0.8898 & 3.3926 \\
-\hline
-\end{tabular}
-\caption{Mean metrics of the model on the whole dataset as inputs and their reconstructions.}
-\label{table:metrics}
-\end{table}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{reports/meta_vqgan_reconstruction_comparison.png}
+    \caption{Top - input, middle reconstruction, bottom difference.}
+    \label{fig:enter-label}
+\end{figure}
+
