@@ -70,27 +70,54 @@ In the table below, autoencoders with their reconstruction quality metrics are p
 In addition, the $LDM$ generation quality was measured in the same way. The generative model is treated as if it were a reconstructor, the same as an autoencoder.
 
 In order to profesionally evaluate quality of the generated dataset, the FID score should be calculated. Since the FID score is related to images, not scans or videos, each layer has been analyzed separately. 
-A synthetic data set of 28 images (length of the original data set) was created. Then each corresponding layer of scans was analyzed by FID. The mean FID score for each layer in the synthethic dataset is equal to 244.65. 
+A synthetic data set of 28 images (length of the original data set) was created. Then each corresponding layer of scans was analyzed by FID. The mean FID score for each layer in the synthethic dataset is equal to 94.41. 
 
 The number is high compared to the ones in the VQGAN paper\cite{esser2021tamingtransformershighresolutionimage}. It could be caused by the fact that LDM may not generate the internals of the body in the correct order, as can be seen in the figure \ref{fig:ldm-success-comparison}. However, it should be acknowledged by a radiology specialist or doctor of medicine.
 \begin{table}[h!]
 \centering
-\begin{tabular}{|c|c|c|c|c|}
+\begin{tabular}{|c|c|c|c}
 \hline
-\textbf{Metric} & VAE & VQVAE1 & Medical Diffusion VQVAE & \textbf{LDM} \\
+\textbf{Metric} & VAE & VQVAE1 & Medical Diffusion VQVAE & \\
 \hline
-$\overline{L1}$ & 0.0309 & 0.0212 & 0.0144 & 0.0845 \\
+$\overline{L1}$ & 0.0309 & 0.0212 & 0.0144 \\
 \hline
-$\overline{L2}$ & 0.0043 & 0.0023 & 0.0007 & 0.0270 \\
+$\overline{L2}$ & 0.0043 & 0.0023 & 0.0007 \\
 \hline
-$\overline{SSIM}$ & 0.8690 & 0.9399 & 0.9795 & 0.5954 \\
+$\overline{SSIM}$ & 0.8690 & 0.9399 & 0.9795 \\
 \hline
-$\overline{LPIPS}$ & 2.2485 & 1.3820 & 0.8898 & 3.3926 \\
+$\overline{LPIPS}$ & 2.2485 & 1.3820 & 0.8898 \\
 \hline
 \end{tabular}
 \caption{Mean metrics of the model on the whole dataset as inputs and their reconstructions.}
 \label{table:metrics}
 \end{table}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Metric} & Medical Diffusion LDM \\
+\hline
+$\overline{L1}$ & 0.0158 \\
+\hline
+$\overline{L2}$ & 0.0007 \\
+\hline
+$\overline{SSIM}$ & 0.9560 \\
+\hline
+$\overline{LPIPS}$ & 0.9831 \\
+\hline
+\end{tabular}
+\caption{Generative quality of Medical LDM. Statistics were calculated between $\overline{x}$ and $\overline{\hat{x}}$.}
+\label{table:metrics-ldm}
+\end{table}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{reports/mean_true_vs_synthetic_comparison.png}
+    \caption{Top - mean CT scan from the true dataset, mean CT scan from the synthetic dataset, bottom - difference.}
+    \label{fig:mean_true_synth_diff}
+\end{figure}
 
 
 % \input{monai}
