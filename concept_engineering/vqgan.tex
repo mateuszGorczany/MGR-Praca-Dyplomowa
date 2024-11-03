@@ -8,25 +8,24 @@ VQGAN proposed in \cite{Esser_2021_CVPR} is a hybrid model that combines VQVAE's
     \label{fig:vqgan-diagram}
 \end{figure}
 
-VQGAN has also a transformer part, which is trained to learn connections between embeeding vectors. It is useful for generating images from text. In case of data augmentation it is not necessary, so this part will be omitted.
-
+VQGAN has also a transformer part, which is trained to learn connections between embeeding vectors. It is useful for generating images from text.
 \paragraph{Loss function}\mbox{}\\
 
 The loss function for VQGAN combines VQVAE and GAN losses:
 
 \begin{itemize}
     \item \textbf{VQVAE loss}: \sout{Reconstruction}, Commitment and Codebook losses,
-    \item \textbf{Adversarial Loss}: The GAN component introduces a discriminator that tries to distinguish between real and synthetic images, pushing the generator to create more realistic images.
+    \item \textbf{Adversarial Loss}: the GAN component introduces a discriminator that tries to distinguish between real and synthetic images, pushing the generator to create more realistic images,
     \item \textbf{Perceptual similarity loss} instead of Reconstruction loss: ensures the generated image matches the real image in terms of higher-level features, most commonly LPIPS\footnote{\url{https://github.com/richzhang/PerceptualSimilarity}} is used for this puprpose.
 \end{itemize}
 
 
-The optimal compression target $Q^{\star}$ is expressed by VQVAE loss\eqref{loss_vq} and GAN loss\eqref{loss_gan} combined together in the formula
+The optimal compression target $Q^{\star}$ is expressed by the VQVAE loss\eqref{loss_vq} and the GAN loss\eqref{loss_gan} combined together in the formula
 \begin{equation}
     Q^{\star} = \text{arg min}_{E,G,Z} \text{max}_D \mathbb{E}_{x~p(x)} [\underbrace{L_{VQ}(E, G, Z)}_{\text{VQVAE loss}} + \lambda\underbrace{L_{GAN}(N, D)}_{\text{adversarial loss}}],
 \end{equation}
 
-where $\lambda$ is the scaling factor. It is important to note that reconstruction loss from the $L_{VQ}$ formula\eqref{loss_vq} - $||x-\hat{x}||^2_2$ is calculated as perceptual loss using LPIPS, not this formula. 
+where $\lambda$ is the scaling factor. It is important to note that reconstruction loss from the $L_{VQ}$ formula\eqref{loss_vq} - $||x-\hat{x}||^2_2$ is calculated as perceptual loss using LPIPS, not the L2 formula. 
 % \begin{equation}
 %     \mathcal{L}_{GAN}(N,D) = [\log D(x) + log(1-D(\hat{x}))]
 % \end{equation}

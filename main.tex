@@ -4,12 +4,13 @@
 \import{./}{frontpage} % strona powitalna
 \newpage
 \textbf{Dedications}\\\\
-\textit{I dedicate this work to my parents for their invaluable support throughout the entire education process.}
+\textit{I dedicate this work to my grandfather[*], who suffered from prostate cancer, and to my parents for their invaluable support throughout the entire education process.}
 \newpage
 \tableofcontents %tworzy spis treści
 \newpage
 \begin{table}[h]
     \centering
+    \footnotesize
     \begin{tabular}{|c|p{0.5\linewidth}|}
         \hline
         Symbols & Description\\
@@ -18,56 +19,64 @@
         $\hat{x}$ & reconstructed input data or generated data, a CT scan,\\
         $z$ & compressed representation of $x$,\\
         $[0,1]^{1xHxWxD}$ & input data space, where $x$ is located,\\
-        $\theta(\cdot)$ & deep learning model used to solve the classification problem, i.e., a function from the family $F$, such that $f \in F: \mathbf{R}^{n1xn2xn3...} \mapsto \mathbf{R}^{n1xn2xn3...}$,\\
-        $L_f(\cdot,\cdot)$ & loss function, specifying the difference between the input $x$ and reconstruction result $\hat{x}$; for example, the mean squared error,\\
+        $\theta(\cdot)$ & deep learning model,\\
+        $L_f(\cdot,\cdot)$ & loss function, specifying the difference between the input $x$ and reconstruction or generation result $\hat{x}$; for example, the mean squared error,\\
         $||\cdot||_p$ & p-norm,\\
         $\nabla$ & gradient,\\
         $epoch$ & one iteration over whole dataset,\\
     \hline
+    
     \end{tabular} 
-    \caption{Description of notation.}
+    \caption{Description of the notation.}
     \label{tab:notation_table}
 \end{table}
 
 \begin{table}[h]
+\scriptsize
     \centering
-    \begin{tabular}{|c|p{0.5\linewidth}|}
-        \hline
-        $H$ & \textbf{H}eight of an image (layer),\\
-        $W$ & \textbf{W}idth of an image (layer),\\
-        $B$ & \textbf{B}atch size - number of scans grouped together,\\
-        $D$ & \textbf{D}epth - number of layers in a scan,\\
-        $T$ & Time, equivalence of $D$, used in a video format,\\
-        $C$ & Image \textbf{C}hannels, scans are grey so $C=1$,\\
-        $(H,W)$ & Image - Matrix dimensions (2D Tensor) that represents an image (scan's one layer),\\
-        $(C,H,W,D)$ & Scan - (\textbf{C}hannels, Image, \textbf{D}epth) - Tensor dimensions that represents one scan,\\
-        $(1,H,W,D)$ & Grey scan,\\
-        $(B,C,H,W,D)$ & B*Scans - Tensor dimensions that represents \textbf{B}atch of scans,\\
-        $(B,C,T,H,W)$ & B*Videos - Tensor dimensions that represents a video,\\
-    \hline
-    \end{tabular} 
-    \caption{Description of image notation.}
-    \label{tab:image_notation_table}
-\end{table}
-
-\begin{table}[h]
-    \centering
+    \footnotesize
     \begin{tabular}{|c|p{0.5\linewidth}|}
         \hline
         Acronyms & Description\\
         \hline
         $CNN$ & Convolutional Neural Network, \\
         $DDP$ & Distributed Data Parallel,\\
-        $L1$ & ...\\
+        $FSDP$ & Fully Sharded Data Parallel,\\
         $AE$ & Autoencoder, \\
         $VAE$ & Variational Autoencoder,\\
-        $VQ-VAE$ & Vector Quantizied - Variational Autoencoder,\\
+        $VQ-VAE$ & Vector Quantized - Variational Autoencoder,\\
         $DDPM$ & Denoising Diffusion Probabilistic Models,\\
+        $LDM$ & Latent Diffusion Model.\\
     \hline
     \end{tabular} 
-    \caption{Description of notation.}
+    \caption{Acronyms dictionary.}
     \label{tab:acronyms_table}
 \end{table}
+
+\begin{table}[h]
+    \centering
+    \footnotesize
+    \begin{tabular}{|c|p{0.5\linewidth}|}
+        \hline
+        Dimensions & Description\\
+        \hline
+        $H$ & \textbf{H}eight of an image (layer),\\
+        $W$ & \textbf{W}idth of an image (layer),\\
+        $B$ & \textbf{B}atch size - number of scans grouped together,\\
+        $D$ & \textbf{D}epth - number of layers in a scan,\\
+        $T$ & Time, equivalence of $D$, used in the video format,\\
+        $C$ & Image \textbf{C}hannels, scans are grey hence $C=1$,\\
+        $(H,W)$ & One channel image - scan's one layer, (2D Tensor),\\
+        $(C,H,W,D)$ & Scan - (\textbf{C}hannels, Image, \textbf{D}epth) - tensor dimensions that represents one scan,\\
+        $(1,H,W,D)$ & Grey scan,\\
+        $(B,C,H,W,D)$ & B$\cdot$Scans - tensor dimensions that represents \textbf{B}atch of scans,\\
+        $(B,C,T,H,W)$ & B$\cdot$Videos - tensor dimensions that represents a video.\\
+    \hline
+    \end{tabular} 
+    \caption{Description of images/scans dimensions.}
+    \label{tab:image_notation_table}
+\end{table}
+
 
 
 \newpage
@@ -101,17 +110,6 @@
 \section{Summary}
 \input{summary}
 
-\newpage
-\section{Annex}
-% uncommment when finished
-% \input{detailed_engineering/Meta VQGAN/train_report}
-% \begin{figure}
-%     \centering
-%     \includegraphics[width=\linewidth]{reports/synthetic_dataset.png}
-%     \caption{Synthetic dataset generated by the LDM and VQVAE decoder. Each row is a sample, that consists of 32 layers (number of images in a row).}
-%     \label{fig:enter-label}
-% \end{figure}
-
 % Motywacja i cel = 2 strony
 % \include{introduction}
 \newpage
@@ -123,4 +121,16 @@
 \setlength\intextsep{0.3cm}
 
 \printbibliography[heading=bibintoc,title=Bibliography]
+
+\newpage
+\section{Appendix}
+% uncommment when finished
+\input{detailed_engineering/Meta VQGAN/train_report}
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{reports/synthetic_dataset.png}
+    \caption{Synthetic dataset generated by the Medical Diffusion technique - LDM and VQVAE decoder. Each row is a sample that consists of 32 layers (number of images in a row).}
+    \label{fig:synthetic-dataset}
+\end{figure}
+
 \end{document}

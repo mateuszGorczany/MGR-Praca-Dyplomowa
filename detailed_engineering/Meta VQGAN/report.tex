@@ -1,4 +1,5 @@
-\paragraph{Model configuration}\mbox{}\\
+\subparagraph{Configuration}\mbox{}\\
+
 \begin{table}[H]
 \centering
 \begin{tabular}{|l|l|}
@@ -73,7 +74,7 @@ Number of Groups & 32 \\
 \hline
 Caching & Disk \\
 \hline
-Path & /ravana/d3d\_work/micorl/data/ct\_images\_prostate\_32fixed/ \\
+Path & \url{/ravana/d3d\_work/micorl/data/ct\_images\_prostate\_32fixed/} \\
 \hline
 Image Size & 128 \\
 \hline
@@ -84,11 +85,13 @@ Window Width & 400 \\
 Window Level & 60 \\
 \hline
 \end{tabular}
-\caption{Parameters for the Meta VQGAN}
+\caption{Configuration of the Medical Diffusion VQGAN.}
 \label{table:meta_vqgan_params}
 \end{table}
 
-\paragraph{Training}\mbox{}\\
+\subparagraph{Training}\mbox{}\\
+
+The training was meant to last 15000 epochs, but it was manually stopped approximately at epoch 8000 due to the fact that for a long time model's reconstruction and perceptual loss did not change.
 
 \begin{figure}[H]
 \minipage{0.49\textwidth}
@@ -104,11 +107,11 @@ Window Level & 60 \\
 
 \begin{figure}[H]
 \minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{detailed_engineering/Meta VQGAN/charts/Section-2-Panel-11-4ox8mpc2c.png}
+\includegraphics[width=\linewidth]{detailed_engineering/Meta VQGAN/charts/Section-2-Panel-7-jxu137h9u.png}
 \caption{Perceptual loss during the training.}
 \endminipage\hfill
 \minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{detailed_engineering/Meta VQGAN/charts/Section-4-Panel-2-2k8ixubhi.png}
+\includegraphics[width=\linewidth]{detailed_engineering/Meta VQGAN/charts/Section-4-Panel-0-9utd8c9z0.png}
 \caption{Perceptual loss during the validation.}
 \endminipage
 \caption{Perceptual loss during the training and the validation. Lower is better.}
@@ -116,15 +119,16 @@ Window Level & 60 \\
 
 \begin{figure}[H]
 \minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{detailed_engineering/Meta VQGAN/charts/Section-2-Panel-13-1qhe42yar.png}
+\includegraphics[width=\linewidth]{detailed_engineering/Meta VQGAN/charts/Section-2-Panel-11-4ox8mpc2c.png}
 \caption{Commitment loss during the training.}
 \endminipage\hfill
 \minipage{0.49\textwidth}
-\includegraphics[width=\linewidth]{detailed_engineering/Meta VQGAN/charts/Section-4-Panel-3-hkj1c12xb.png}
+\includegraphics[width=\linewidth]{detailed_engineering/Meta VQGAN/charts/Section-4-Panel-2-2k8ixubhi.png}
 \caption{Commitment loss during the validation.}
 \endminipage
-\caption{Commitment loss during the training and the validation. Lower is better.}
+\caption{Commitment loss during the training and the validation.}
 \end{figure}
+
 
 \begin{figure}[H]
 \minipage{0.49\textwidth}
@@ -135,15 +139,17 @@ Window Level & 60 \\
 \includegraphics[width=\linewidth]{detailed_engineering/Meta VQGAN/charts/Section-4-Panel-1-njiwngfn7.png}
 \caption{Perplexity during the validation.}
 \endminipage
-\caption{Codebook utilisation during the training and the validation. Higher is better.}
+\caption{Codebook utilisation during the training and the validation. Lower is better.}
 \end{figure}
 
-\paragraph{Results}\mbox{}\\
+\subparagraph{Results}\mbox{}\\
+
+The training was finished with low reconstruction and perceptual losses. The resulting reconstruction $\hat{x}$ seems almost indistinguishable from the original $x$, as shown in the figure \ref{fig:md-vqgan-comparison}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\linewidth]{reports/meta_vqgan_reconstruction_comparison.png}
-    \caption{Top - input, middle reconstruction, bottom difference.}
-    \label{fig:enter-label}
+    \caption{Top - input, middle - reconstruction, bottom - difference.}
+    \label{fig:md-vqgan-comparison}
 \end{figure}
 

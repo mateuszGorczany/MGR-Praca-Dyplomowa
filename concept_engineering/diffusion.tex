@@ -38,7 +38,7 @@ In practice, ELBO optimization is only the theoretical objective in DDPMs.
 % \end{equation}
 
 \begin{equation}
-\begin{aligned} L_{\text {simple }}(\theta) & :=E_{t \sim U[1, T], \mathbf{x}_0, \epsilon}\left[\left\|\epsilon-\epsilon_\theta\left(\mathbf{x}_t, t\right)\right\|^2\right] \\ & =E_{t \sim U[1, T], \mathbf{x}_0, \epsilon}\left[\left\|\epsilon-\epsilon_\theta\left(\sqrt{\bar{\alpha}_t} \mathbf{x}_0+\sqrt{1-\bar{\alpha}_t} \epsilon, t\right)\right\|^2\right]
+\begin{aligned} L_{\text {simple }}(\theta) & :=E_{t \sim U[1, T], \mathbf{x}_0, \epsilon}\left[\left\|\epsilon-\epsilon_\theta\left(\mathbf{x}_t, t\right)\right\|^2\right] \\ & =E_{t \sim U[1, T], \mathbf{x}_0, \epsilon}\left[\left\|\epsilon-\epsilon_\theta\left(\sqrt{\bar{\alpha}_t} \mathbf{x}_0+\sqrt{1-\bar{\alpha}_t} \epsilon, t\right)\right\|^2\right],
 \end{aligned}
 \end{equation}
 
@@ -50,16 +50,17 @@ where:
     \item $\epsilon$ - gaussian noise added to original image,
     \item $\theta$ - neural network, for example U-Net,
     \item $\epsilon_\theta(x_t, t)$ - noise predicted by a neural network for a timestep $t$,
-    \item $\overline{\alpha_t}$ - scaling factor,
+    \item $\overline{\alpha_t}$ - scaling factor.
 \end{itemize}
 
-The scaling factor is defined as cumulative product of all $\alpha$ between 1 and $t$. 
+The scaling factor is defined as cumulative product of all $\alpha$ between 1 and $t$:
 \begin{equation}
-    \overline{\alpha_t} = \prod_{s=1}^t \alpha_s.
+    \overline{\alpha_t} = \prod_{s=1}^t \alpha_s,
 \end{equation}
 
+and 
 \begin{equation}
-    \alpha_t = 1-\beta_t
+    \alpha_t = 1-\beta_t.
 \end{equation}
 
 The term $\beta_t$ is called "diffusion rate" for timestep $t$ and is calculated using a "noise scheduler". Such scheduler controls how much noise is added to an image in each step. Noise scheduler can be, for example, linear, scaled linear or squared cosine cap.
@@ -73,7 +74,7 @@ The term $\beta_t$ is called "diffusion rate" for timestep $t$ and is calculated
     \label{fig:diffusion-algo}
 \end{figure}
 In the training algorithm[\ref{fig:diffusion-algo}] the loss is calculated as a squared error between noise and predicted noise at a timestep $t$. However in practice all squared errors are calculated for each timestep $t$ and then final loss over an image (or a scan in 3D case) is calculated as a mean of these squared errors - MSE. 
-This final loss is then aggregated with losses from the whole batch. In this point the gradient is calculated.  
+This final loss is then aggregated with losses from the whole batch. At this point the gradient is calculated.  
 
 \paragraph{Generation of CT scans}\mbox{}\\
 \indent To generate artificial CT scans using DDPM, we could start by sampling gaussian noise and iteratively apply the learned reverse diffusion process. This process should refine the noise into a synthetic CT image that would progressively capture more and more of the anatomical details of the pelvis region.

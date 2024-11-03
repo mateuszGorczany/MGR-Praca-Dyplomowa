@@ -5,7 +5,7 @@
     \label{fig:vae}
 \end{figure}
 
-\indent The main issue with autoencoders in the context of synthetic data generation is that we do not know what values should be assigned to the layer $z$ and passed through decoder in order to obtain meaningful results. The Variational Autoencoder addresses it.
+\indent The main issue with autoencoders in the context of synthetic data generation is that we do not know what values should be assigned to the layer $z$ and passed through decoder in order to obtain meaningful results. The Variational Autoencoder addresses this problem.
 This model extends the standard autoencoder by linking it with probability concepts: mean and standard deviation. VAE learns not only to create a compressed representation of the data, but also a distribution over that representation. This makes VAEs capable of generating new data samples that are similar to those in the training set. Thus, VAE is a suitable choice for image generation, data augmentation, and even anomaly detection.
 
 \begin{figure}[H]
@@ -29,6 +29,7 @@ The VAE loss is a combination of:
 \item \textbf{Reconstruction Loss}, which ensures how well the reconstructed image matches the original input image, for example $L1$, $L2$, $MSE$,
 \item \textbf{KL Divergence Loss} that ensures the latent space follows a Gaussian distribution.
 \end{enumerate}
+The loss formula:
 
 \begin{equation}
     L = L_{reconstruction} + \mathbb{KL}(q(z | x) || p(z)),
@@ -36,7 +37,7 @@ The VAE loss is a combination of:
 
 where 
 \begin{itemize}
-    \item $\mathbb{KL}$ - Kullback-Leibler divergence\footnote{\url{https://en.wikipedia.org/wiki/Kullback\%E2\%80\%93Leibler_divergence}}, measures how much two distributions differ from each other,
+    \item $\mathbb{KL}$ - Kullback-Leibler divergence\footnote{\url{https://en.wikipedia.org/wiki/Kullback\%E2\%80\%93Leibler_divergence}}, measures how much two probability distributions differ from each other,
     \item $q(z | x) = \mathcal{N}(\mu, \sigma)$ - probability distribution of the latent representation $z$, in other words probability distribution of endocers output,
     \item $p(z) = \mathcal{N}(0,1)$ - expected probability distribution.
 \end{itemize}
@@ -46,10 +47,10 @@ After substituting probabilities, the loss $L$ becomes\footnote{Broader explanat
     L = L_{reconstruction} + \mathbb{KL}(\mathcal{N}(\mu,\sigma), \mathcal{N}(0,1)).
 \end{equation}
 
-The difference between two Gaussians can be calculated using the identity\cite{7449}. 
+The difference between two Gaussians can be calculated using the identity\cite{7449}, 
 
 \begin{equation}
-    \mathbb{KL}\left( \mathcal{N}(\mu, \sigma) \parallel \mathcal{N}(0, 1) \right) = \sum_{x \in X} \left( \sigma^2 + \mu^2 - \log \sigma - \frac{1}{2} \right)
+    \mathbb{KL}\left( \mathcal{N}(\mu, \sigma) \parallel \mathcal{N}(0, 1) \right) = \sum_{x \in X} \left( \sigma^2 + \mu^2 - \log \sigma - \frac{1}{2} \right).
 \end{equation}
 
 

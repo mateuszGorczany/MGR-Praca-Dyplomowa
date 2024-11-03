@@ -1,9 +1,11 @@
-The Medical Diffusion\footnote{\url{https://github.com/FirasGit/medicaldiffusion}} model and its implementation are based on the work presented in the article \cite{https://doi.org/10.48550/arxiv.2211.03364}. 
+The Medical Diffusion\cite{https://doi.org/10.48550/arxiv.2211.03364} model and its implementation are based on the work presented in the Github repository\footnote{\url{https://github.com/FirasGit/medicaldiffusion}}.
+In this approach first, the VQGAN model is trained to learn to reconstruct the input data. Then the task of the latent diffusion model is to learn to generate the latent representation of the input data from Gaussian noise $\sim\mathcal{N}(0,1)$.
+After both are trained, synthetic data generation is done as described in the VQVAE section.
 
-\paragraph{Medical Diffusion: VQVAE}\mbox{}\\
+\newpage
+\paragraph{Medical Diffusion: VQGAN}
 \input{detailed_engineering/Meta VQGAN/report}
 
+\newpage
 \paragraph{Medical Diffusion LDM}\mbox{}\\
-\paragraph{Model configuration}
-
 \input{detailed_engineering/Meta Diffusion/report}

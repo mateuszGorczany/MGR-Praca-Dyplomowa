@@ -1,23 +1,25 @@
 \subsubsection{Algorithms}
 Evaluating the quality of artificial model reconstructions or generations necessitates specialized algorithms. These algorithms must be capable of comparing not only individual pixels, but also the structure and semantics of the images.
 \paragraph{L1 norm}\mbox{}\\
-\indent The L1 norm is also known as the Manhattan distance or the Taxicab norm and is the most straightforward method to measure the distance between vectors, matrices, or tensors. Calculated as the sum of the absolute differences between their components. 
+\indent The L1 norm is also known as the Manhattan distance or the Taxicab norm and is the most straightforward method of measuring the distance between vectors, matrices or tensors. Metric is calculated as the sum of the absolute differences between their components. 
 For vectors, the L1 Norm represents the magnitude in a given space. 
-In the case of grey CT scan (1,W,H,D) it is calculated as follows:
+In the case of grey CT scan (1,H,W,D) it is calculated as follows:
 \begin{equation}
-||x-\hat{x}||_1 = \sum_{i=1}^{W} \sum_{j=1}^{H} \sum_{k=1}^{D} |x_{i,j,k}-\hat{x}_{i,j,k}|
+||x-\hat{x}||_1 = \sum_{i=1}^{H} \sum_{j=1}^{W} \sum_{k=1}^{D} |x_{i,j,k}-\hat{x}_{i,j,k}|.
 \label{norm-l1}
 \end{equation}
 
 \paragraph{L2 norm}\mbox{}\\
-\indent L2 norm emphasizes larger deviations, making it sensitive to noise and outliers.
+\indent L2 norm, often named as \textbf{S}quared \textbf{E}rror, emphasizes larger deviations, making it sensitive to noise and outliers
 \begin{equation}
-||x-\hat{x}||_2 = \sqrt{\sum_{i=1}^{W} \sum_{j=1}^{H} \sum_{k=1}^{D} {(x_{i,j,k}-\hat{x}_{i,j,k})^2}}
+||x-\hat{x}||_2 = \sqrt{\sum_{i=1}^{H} \sum_{j=1}^{W} \sum_{k=1}^{D} {(x_{i,j,k}-\hat{x}_{i,j,k})^2}}.
 \label{norm-l2}
 \end{equation}
-L1 and L2 norms measure pixel-wise differences between generated and real images.
+\textbf{M}ean \textbf{S}quared \textbf{E}rror (MSE), refered later, is scaled L2 metric -  $\frac{1}{n}L2$.
+
+L1 and L2 norms measure the differences in pixels between the reconstructed/generated and real images.
 \paragraph{SSIM - Structural Similarity Metric}\mbox{}\\
-\indent SSIM is a metric designed to assess image quality by comparing the structural information between two images. Unlike pixel-wise metrics like L1 or L2, SSIM focuses on perceived changes in structural information, such as luminance, contrast, and spatial correlations, which are crucial for medical images like CT scans.
+\indent SSIM is a metric designed to assess image quality by comparing structural information between two images. Unlike pixel-wise metrics like L1 or L2, SSIM focuses on perceived changes in structural information, such as luminance, contrast, and spatial correlations, which are crucial for medical images, such as CT scans. The higher SSIM, the better the reconstruction or generation.
 \begin{equation}
     \hbox{SSIM}(x,y) = \frac{(2\mu_x\mu_y + c_1)(2\sigma_{xy} + c_2)}{(\mu_x^2 + \mu_y^2 + c_1)(\sigma_x^2 + \sigma_y^2 + c_2)}
 \end{equation}
@@ -42,10 +44,10 @@ L = 2^{\#\text{bits per pixel}} - 1,
 $k_{1} = 0.01$ and $k_{2} = 0.03$ by default.
 
 \paragraph{LPIPS - Learned Perceptual Image Patch Similarity}\mbox{}\\
-\indent The objective of LPIPS is to assess the perceptual similarity between two images by utilising deep neural networks that have been trained on human visual preferences.
+\indent The objective of LPIPS is to assess the perceptual similarity between two images by utilising deep neural networks that have been trained on human visual preferences. Lower LPIPS means image is more similar.
 
 \paragraph{FID - Frechet Image Distance}\mbox{}\\
-\indent The FID score compares the distribution of two datasets (real and generated) by calculating the Fréchet distance between multivariate Gaussian distributions, estimated from feature vectors extracted from a pre-trained deep network. The lower the FID score, the more similar the generated images are to the real ones. FVD - Frechet Video Distance.
+\indent The FID score compares the distribution of two datasets (real and generated) by calculating the Fréchet distance between multivariate Gaussian distributions, estimated from feature vectors extracted from a pre-trained deep network. The lower the FID score, the more similar the generated images are to the real ones. 
 
 \subsubsection{Human evaluation}
-The final quality of the generated scans or reconstructions can be evaluated by humans. Especially when it comes to assesing the final quality of generated dataset - specialists from the field of radiology and medicine should be the ones to judge whether synthetic dataset has sufficient quality. 
+The final quality of the generated scans or reconstructions can be evaluated by humans. Especially when it comes to assessing the final quality of generated dataset - specialists from the field of radiology and medicine should be the ones to judge whether synthetic dataset has sufficient quality. 

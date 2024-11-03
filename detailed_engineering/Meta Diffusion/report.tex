@@ -1,4 +1,5 @@
-\paragraph{Model configuration}\mbox{}\\
+\indent LDM was based on the U-Net3D architecture.
+\subparagraph{Configuration}\mbox{}\\
 
 \begin{table}[H]
 \centering
@@ -34,7 +35,7 @@ Learning Rate & 0.0001 \\
 \hline
 Loss Type & L1 \\
 \hline
-VQGAN Checkpoint Path & ./models/meta_vqgan/checkpoints/meta_vqgan-v5.ckpt \\
+VQGAN Checkpoint Path & \url{./models/meta_vqgan/checkpoints/meta_vqgan-v5.ckpt} \\
 \hline
 Probability of Focus Present & 0.0 \\
 \hline
@@ -52,7 +53,7 @@ Start Step & 2000 \\
 \hline
 Update Every Step & 10 \\
 \hline
-\multicolumn{2}{|c|}{\textbf{Scan Parameters}} \\
+\multicolumn{2}{|c|}{\textbf{Hidden Scan Representation}} \\
 \hline
 Image Size & 64 \\
 \hline
@@ -72,7 +73,7 @@ Dimension Multipliers & [1, 2, 4, 8] \\
 \hline
 Caching & Disk \\
 \hline
-Path & /ravana/d3d_work/micorl/data/ct_images_prostate_32fixed/ \\
+Path & \url{/ravana/d3d_work/micorl/data/ct_images_prostate_32fixed/} \\
 \hline
 Image Size & 128 \\
 \hline
@@ -83,13 +84,13 @@ Window Width & 400 \\
 Window Level & 60 \\
 \hline
 \end{tabular}
-\caption{Parameters for the Meta Diffuser}
+\caption{Configuration of the Medical Diffusion LDM.}
 \label{table:meta_diffuser_params}
 \end{table}
 
+\subparagraph{Training}\mbox{}\\
 
-
-\paragraph{Training}\mbox{}\\
+\indent Throughout the first 2000 epochs, losses consistently decreased in both the training and validation phases but after they stood still. Nevertheless, it was decided to continue the training until the end - epoch 15000.
 \begin{figure}[H]
 \minipage{0.49\textwidth}
 \includegraphics[width=\linewidth]{detailed_engineering/Meta Diffusion/charts/train_loss.png}
@@ -111,7 +112,7 @@ Additional metrics evaluating the quality of the generated scan.
 \includegraphics[width=\linewidth]{detailed_engineering/Meta Diffusion/charts/val_l1_epoch.png}
 
 \endminipage
-\caption{L1 between two generated CT scans and two random samples from training/validation datasets. Lower is better.}
+\caption{L1 between two generated CT scans and two random samples from the training/validation datasets. Lower is better.}
 \end{figure}
 
 \begin{figure}[H]
@@ -123,7 +124,7 @@ Additional metrics evaluating the quality of the generated scan.
 \includegraphics[width=\linewidth]{detailed_engineering/Meta Diffusion/charts/val_l2_epoch.png}
 
 \endminipage
-\caption{L2 between two generated CT scasn and two random samples from training/validation datasets. Lower is better.}
+\caption{L2 between two generated CT scans and two random samples from the training/validation datasets. Lower is better.}
 \end{figure}
 
 \begin{figure}[H]
@@ -135,10 +136,11 @@ Additional metrics evaluating the quality of the generated scan.
 \includegraphics[width=\linewidth]{detailed_engineering/Meta Diffusion/charts/val_ssim_epoch.png}
 
 \endminipage
-\caption{MSSIM between two generated Ct scans and two random samples from training/validation datasets. Higher is better.}
+\caption{SSIM between two generated CT scans and two random samples from the training/validation datasets. Higher is better.}
 \end{figure}
 
-\paragraph{Results}\mbox{}\\
+\subparagraph{Results}\mbox{}\\
+\indent The resulting exemplary scan of the figure \ref{fig:random_ldm} produced by the latent diffusion model is visually coherent and looks real to the amateur. The comparison between one sample of the input data set and the generated scan in the figure \ref{fig:ldm-success-comparison} shows that there is not much difference between them. The model is a good candidate for the evaluation phase.
 
 % \begin{figure}[H]
 %     \centering
@@ -149,17 +151,17 @@ Additional metrics evaluating the quality of the generated scan.
 \begin{figure}[H]
     \centering
     % \includegraphics{}
-     \animategraphics[width=\textwidth, loop, autoplay]{5}%frame rate
+     \animategraphics[width=0.6\textwidth, loop, autoplay]{5}%frame rate
     {detailed_engineering/Meta Diffusion/generation/layer-}%path to figures
     {0}%start index
     {31}%end index
-    \caption{Random layer of synthetic CT scan generated from Gaussian noise.}
-    \label{fig:my_label}
+    \caption{Random layer of a synthetic CT scan generated from Gaussian noise.}
+    \label{fig:random_ldm}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\linewidth]{detailed_engineering/Meta Diffusion/charts/meta_diffusion_comparison.png}
-    \caption{Top - first sample from trianing dataset, middle - synthetic CT scan, bottom - L1 difference between them.}
+    \caption{Top - first sample from training dataset, middle - synthetic CT scan, bottom - L1 difference between them.}
     \label{fig:ldm-success-comparison}
 \end{figure}

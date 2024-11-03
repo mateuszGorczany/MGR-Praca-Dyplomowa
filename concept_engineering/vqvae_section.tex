@@ -6,7 +6,7 @@
     \label{fig:vavae1}
 \end{figure}
 
-The variational autoencoders latent representation $z$ can have any value, usually from the distribution $\sim \mathbb{N}(0,1)$. Unfortunately, it sometimes leads to posterior collapse. This means that the decoder starts to treat latent representation $z$ as meaningless noise and ignores it. Instead, it learns to encode the dataset in itself. When something like this happens decoder cannot generate meaningful results, no matter the given $z$. 
+The latent representation of the variational autoencoders $z$ is close to $\sim \mathbb{N}(0,1)$. Unfortunately, it sometimes leads to posterior collapse. This means that the decoder starts to treat latent representation $z$ as meaningless noise and ignores it. Instead, it learns to encode the dataset in itself. When something like this happens, the decoder cannot generate meaningful results, no matter the given $z$. 
 
 \begin{figure}[H]
     \centering
@@ -15,24 +15,24 @@ The variational autoencoders latent representation $z$ can have any value, usual
     \label{fig:vqvae-paper}
 \end{figure}
 
-To mitigate this issue, researchers\cite{oord2018neuraldiscreterepresentationlearning} came up with the idea of having a fixed set of latent representations that hold semantic meaning. In case of images, the encoder compresses the original image of dimensions $(C,H,W)$ to its latent representation $(D,H_2,W_2)$ (a tensor "cube"), where $C<D$, $H>H_2$ and $W>W_2$. Then each latent "pixel" (a cell on a figure\ref{fig:vqvae-paper}) gets a vector from the codebook that holds the semantic meaning of this part of the compressed image. 
+To mitigate this issue, researchers\cite{oord2018neuraldiscreterepresentationlearning} came up with the idea of having a fixed set of latent representations that hold semantic meaning. In case of images, the encoder compresses the original image of dimensions $(C,H,W)$ to its latent representation $(D,H_2,W_2)$ (a tensor "cube" in the figure \ref{fig:vqvae-paper}), where $C<D$, $H>H_2$ and $W>W_2$. Then each latent "pixel" (a cell in the figure \ref{fig:vqvae-paper}) gets a vector from the codebook that holds the semantic meaning of this part of the compressed image. 
 
 %the image to codes from the codebook and then uses the decoder to retrieve the original value. 
 
 \paragraph{Loss function}\mbox{}\\
 % Reconstruction Loss (between input and output) and Commitment Loss (penalizing the difference between encoder outputs and quantized embeddings).
-The VQVAE loss has three parts.
+The VQVAE loss has three parts:
 
 \begin{itemize}
-    \item \textbf{Reconstruction loss} the same as in the VAE, measures how ensures the output matches the input.
-    \item \textbf{Commitment loss} - penalizes the difference between encoder outputs and quantized embeddings,
-    \item \textbf{Codebook loss} - it is the same value as commitment loss, however it is used to change values of codebook representations through backpropagation.
+    \item \textbf{Reconstruction loss} the same as in the VAE, measures how the output matches the input,
+    \item \textbf{Codebook loss} that penalizes the difference between encoder outputs and quantized embeddings; in result it moves codebook vectors towards encoder outputs, 
+    \item \textbf{Commitment loss} that moves encoder outputs towards codebook vectors; it has the same value as the codebook loss$\cdot\beta$, however different gradients are used to change values of the codebook representations through backpropagation.
 \end{itemize}
 
-which can be expressed by this formula
+Loss is expressed by the formula
 \begin{equation}
     L_{VQ}(E, G, Z) = \underbrace{||x-\hat{x}||^{2}}_{\text{reconstruction loss}} + \underbrace{||sg[E(x)] - z_\mathbf{q}||_2^2}_{\text{codebook loss}}
-+ \underbrace{||sg[z_\mathbf{q}] - E(x) ||_{2}^2}_{\text{commitment loss}},
++ \underbrace{\beta||sg[z_\mathbf{q}] - E(x) ||_{2}^2}_{\text{commitment loss}},
     \label{loss_vq}
 \end{equation}
 
@@ -44,15 +44,15 @@ where
     \item $sg$ - stop gradient.
 \end{itemize}
 
-VQVAE models have one important metric to note - Perplexity. It measures utilization of the codebook during embeeding. Higher is better.
+VQVAE models have one important metric to note - perplexity, which measures utilization of the codebook during embeeding. A high perplexity indicates an increase in the uncertainty or confusion of the model. Lower is better.
 
 % Codebook Loss: Ensures the quantized latent vectors match the encoder output.
 % The commitment loss encourages the encoder to use the codebook efficiently.
 \paragraph{Generation of CT scans}\mbox{}\\
-\indent Unlike in case of VAE, the probability distribution $q(z_e|x)$ is not conditioned to be close to $\mathcal{N}(0,1)$. Thus, to generate a new image, one cannot just pass a Gaussian noise tensor through the codebook and decoder.
+\indent Unlike in the case of VAE, the probability distribution $q(z_e|x)$ is not conditioned to be close to $\mathcal{N}(0,1)$. Thus, to generate a new image, one cannot just pass a Gaussian noise tensor through the codebook and decoder.
 Instead, after successful training of VQVAE, another model like LDM should be used to learn to generate $z_e$ from Gaussian noise.
 
-After that, to generate a synthetic CT scan, one can generate a tensor $z$ of Gaussian noise and then pass it through the denoising LDM to obtain $z_e$. Next, the closest codebook vector should be chosen for each "hidden pixel", for example using L1, L2 or MSE. After that, one would obtain $z_q$, which should then pass through the decoder to obtain the synthetic image.
+After that, to generate a synthetic CT scan, one can generate a tensor $z$ of Gaussian noise $\sim\mathcal{N}(0,1)$ and then pass it through the denoising LDM to obtain $z_e$. Next, the closest codebook vector should be chosen for each "hidden pixel", for example using L1, L2 or MSE. After that, one would obtain $z_q$, which should then pass through the decoder to obtain the synthetic image.
 
 
 % should be created and used to select the closest latent code from the codebook. Then the retrieved latent code should be passed through the decoder in order to transform it into a synthetic CT image.

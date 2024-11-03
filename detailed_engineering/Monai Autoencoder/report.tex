@@ -1,6 +1,5 @@
-\paragraph{Monai VAE}\mbox{}\\
-
-\paragraph{Model configuration}\mbox{}\\
+\paragraph{Monai VAE}\mbox{}
+\subparagraph{Configuration}\mbox{}\\
 \begin{table}[h!]
 \centering
 \begin{tabular}{|l|l|}
@@ -45,7 +44,7 @@ Autoencoder Warm-Up Epochs & 5 \\
 \hline
 Caching & Disk \\
 \hline
-Path & /ravana/d3d\_work/micorl/data/ct\_images\_prostate\_32fixed/ \\
+Path & \url{/ravana/d3d\_work/micorl/data/ct\_images\_prostate\_32fixed/} \\
 \hline
 Image Size & 128 \\
 \hline
@@ -56,42 +55,46 @@ Window Width & 400 \\
 Window Level & 60 \\
 \hline
 \end{tabular}
-\caption{Parameters for the MONAI Autoencoder}
+\caption{Configuration of the MONAI Autoencoder.}
 \label{table:monai_autoencoder_params}
 \end{table}
 
+\newpage
+\subparagraph{Training}\mbox{}\\
 
-\paragraph{Training}\mbox{}\\
+The model was trained for 1500 epochs. During the training, the loss was steadily decreasing. However, the generator loss started to increase after approximately 500 epochs. On the other hand, the loss of the generator during the validation phase did not show the same pattern.
 
 \begin{figure}[H]
 \minipage{0.49\textwidth}
 \includegraphics[width=\linewidth]{detailed_engineering/Monai Autoencoder/charts/epoch_loss.png}
-\caption{}
+\caption{Loss during the training.}
 \endminipage\hfill
 \minipage{0.49\textwidth}
 \includegraphics[width=\linewidth]{detailed_engineering/Monai Autoencoder/charts/discriminator_loss.png}
-\caption{}
+\caption{Discriminator loss during the training.}
 \endminipage
 \end{figure}
 
 \begin{figure}[H]
 \minipage{0.49\textwidth}
 \includegraphics[width=\linewidth]{detailed_engineering/Monai Autoencoder/charts/generator_loss.png}
-\caption{}
+\caption{Generator loss during the training.}
 \endminipage\hfill
 \minipage{0.49\textwidth}
 \includegraphics[width=\linewidth]{detailed_engineering/Monai Autoencoder/charts/val_generator_loss.png}
-\caption{}
+\caption{Generator loss during the validation.}
 \endminipage
 \end{figure}
 
 
-\paragraph{Results}\mbox{}\\
+\subparagraph{Results}\mbox{}\\
+
+The resulting model was able to produce decent reconstructions. The difference between input and reconstruction was not large, as shown in Figure \ref{fig:monai-vae-comparison}. However, it may indicate that there is a field for improvement and the model parameters should be studied to see if the model is able to produce better reconstructions.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\linewidth]{reports/monai_autoenc_comparison_full.png}
-    \caption{Top - input, middle reconstruction, bottom difference.}
-    \label{fig:enter-label}
+    \caption{Top - input, middle - reconstruction, bottom - difference.}
+    \label{fig:monai-vae-comparison}
 \end{figure}
 

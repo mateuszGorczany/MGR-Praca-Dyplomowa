@@ -1,6 +1,6 @@
 
-\paragraph{VQVAE}\mbox{}\\
-\paragraph{Model configruation}\mbox{}\\
+\paragraph{VQVAE}\mbox{}
+\subparagraph{Configuration}\mbox{}\\
 
 \begin{table}[h!]
 \centering
@@ -69,49 +69,56 @@ Window Width & 400 \\
 Window Level & 60 \\
 \hline
 \end{tabular}
-\caption{Parameters for the Training Configuration}
+\caption{Configuration of the VQVAE approach.}
 \label{table:training_params}
 \end{table}
 
-\paragraph{Training}\mbox{}\\
+\subparagraph{Training}\mbox{}\\
+
+The model was trained for 10000 epochs. As visible in the plots below, all losses started to slow down after epoch 2000. 
 
 \begin{figure}[H]
 \minipage{0.49\textwidth}
 \includegraphics[width=\linewidth]{detailed_engineering/German VQVAE/charts/train_l1.png}
-\caption{}
+\caption{Training.}
 \endminipage\hfill
 \minipage{0.49\textwidth}
 \includegraphics[width=\linewidth]{detailed_engineering/German VQVAE/charts/val_l1.png}
-\caption{}
+\caption{Validation.}
 \endminipage
+\caption{L1 loss between input and its reconstruction. Lower is better.}
 \end{figure}
 
 \begin{figure}[H]
 \minipage{0.49\textwidth}
 \includegraphics[width=\linewidth]{detailed_engineering/German VQVAE/charts/train_l2.png}
-\caption{}
+\caption{Training.}
 \endminipage\hfill
 \minipage{0.49\textwidth}
 \includegraphics[width=\linewidth]{detailed_engineering/German VQVAE/charts/val_l2.png}
-\caption{}
+\caption{Validation.}
 \endminipage
+\caption{L2 loss between input and its reconstruction. Lower is better.}
 \end{figure}
 
 \begin{figure}[H]
 \minipage{0.49\textwidth}
 \includegraphics[width=\linewidth]{detailed_engineering/German VQVAE/charts/train_ssim.png}
-\caption{}
+\caption{Training.}
 \endminipage\hfill
 \minipage{0.49\textwidth}
 \includegraphics[width=\linewidth]{detailed_engineering/German VQVAE/charts/val_ssim.png}
-\caption{}
+\caption{Validation.}
 \endminipage
+\caption{SSIM loss between input and its reconstruction. Higher is better.}
 \end{figure}
 
 
 
 
-\paragraph{Results}\mbox{}\\
+\subparagraph{Results}\mbox{}\\
+
+The best results were obtained for a checkpoint of the model from the 8499 epoch. At that point, model reconstructions seem almost indistinguishable from the original, as is shown in the figure \ref{fig:german_vqvae_best}.
 
 \begin{figure}[H]
     \centering

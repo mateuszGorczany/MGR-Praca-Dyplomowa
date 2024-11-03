@@ -1,9 +1,7 @@
-The first attempt to generate artificial scans was based on the variant autoencoder architecture proposed in \cite{rombach2022high}. The implementation was based on the Monai\cite{Cardoso_MONAI_An_open-source_2022} example available on Github\footnote{\url{https://github.com/Project-MONAI/GenerativeModels/blob/e7cc989cdce440a7bff1cce22fff1caf760f39cd/tutorials/generative/3d_autoencoderkl/3d_autoencoderkl_tutorial.ipynb}} and adjusted to Pytorch Lightning.
-
+The first attempt to generate artificial scans was based on the variational autoencoder trained in the GAN system, proposed in \cite{rombach2022high}. The implementation was based on the Monai\cite{Cardoso_MONAI_An_open-source_2022} example available on Github\footnote{\url{https://github.com/Project-MONAI/GenerativeModels/blob/e7cc989cdce440a7bff1cce22fff1caf760f39cd/tutorials/generative/3d_autoencoderkl/3d_autoencoderkl_tutorial.ipynb}} and adjusted to Pytorch Lightning. Firstly VAE was trained to learn to reconstruct the input data. Then LDM was trained to learn to generate latent representations of the input data from pure noise.
 \input{detailed_engineering/Monai Autoencoder/report}
 
-
 \input{detailed_engineering/Monai Diffusion - Attempt 1/report}
-\input{detailed_engineering/Monai Diffusion - Attempt 2/report}
+% \input{detailed_engineering/Monai Diffusion - Attempt 2/report}
 
 

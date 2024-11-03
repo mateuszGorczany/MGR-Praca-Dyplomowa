@@ -1,55 +1,58 @@
 \subsection{Programming setup}
-Data augmentation using deep learing is a highly complicated process, so choosing the right tooling plays a crucial role in it. Lack of knowledge about modern technologies that help with programming environment setup may lead to many hours of additional time spent on the project that are not specifically related to the core analysis. In order to reduce the time spent on configuration errors, modern state-of-the-art technologies were employed to mitigate this issue.  
+Data augmentation using deep learning is a highly complicated process, so choosing the right tooling plays a crucial role. Lack of knowledge about modern technologies that help with programming environment setup may lead to many hours of additional time spent on the project that are not specifically related to the core analysis. In order to reduce the time spent on configuration errors, modern state-of-the-art technologies were employed to mitigate this issue.  
 
 \input{detailed_engineering/programming_setup}
 \newpage
 \subsection{Hardware}
-Training neural networks demands substantial computational resources, particularly for the latest architecture models. These models typically consume significant memory, making it impractical to train them on personal computers. To address this, two Nvidia Quadro RTX 8000 GPUs, each equipped with 48GB of RAM, were utilized. 
+Training neural networks requires substantial computational resources, particularly for the latest architecture models. These models typically consume significant memory, making it impractical to train them on personal computers. To address this, two Nvidia Quadro RTX 8000 GPUs, each equipped with 48GB of RAM, were utilized. The computer was located at the WFiIS Faculty at the AGH UST in Kraków. 
 
 \subsection{Hardware utilisation - Multiple GPU utilisation techniques}
-Training on a single GPU is straightforward. However, when a single card falls short, the challenge of leveraging multiple GPUs arises. The solution varies based on the underlying reason for employing multiple GPUs.
+Training on a single GPU is straightforward. However, when a single card falls short, the challenge of leveraging multiple GPUs arises. The solution varies according to the underlying reason for employing multiple GPUs.
 \paragraph{Distributed data parallel}\mbox{} \\
-If a single GPU can handle training a neural network but you wish to speed up the process with an additional GPU, the Distributed Data Parallel (DDP) technique can be used. This approach distributes the neural network model and data across both GPUs, allowing for concurrent training of two model instances. However, during the backpropagation phase, the gradients are synchronized and averaged.
+\indent In case a single GPU can handle training a neural network, but someone wanted to speed up the process with an additional GPU, the Distributed Data Parallel (DDP) technique can help. This approach distributes copies of a neural network model and data across all GPUs, allowing for concurrent training of multiple model instances. However, during the backpropagation phase, the gradients are synchronized and averaged.
 
 This technique was used to train most of the models presented later, since it sped up the training twice. 
 
-\paragraph{Distributed data parallel sharded}\mbox{} \\
-If one GPU is unable to fit into its memory model, then the distributed data parallel shared technique can be used to solve the issue. Splits the model layers between cards and then uses cross-device communication techniques to train the model. However, this solution slows down the training due to the overhead of cross-device communication.
+\paragraph{Fully Sharded Data Parallel}\mbox{} \\
+\indent When a model cannot fit in one GPU memory, then the fully sharded data parallel (FSDP) technique can be used to solve the problem. This technique splits the model layers between cards and then uses cross-device communication techniques to train the model. However, this solution slows down the training due to the overhead of cross-device communication.
 
-\newpage 
-\subsection{Training monitoring}
-Training of neural networks often takes a lot of time - hours, days, weeks and sometime even months. It is crucial to monitor it in order not to waste resources on unsuccessful training. Whats more - when there are many models that are trained or there are many attempts of training it is easy to loose track of what has been accomplished, which models were already trained and what were the results. 
+\subsection{Training monitoring}\mbox{}\\
+\indent Training of neural networks often takes a lot of time - hours, days, weeks and sometime even months. It is crucial to monitor it in order not to waste resources on unsuccessful training. Whats more - when there are many models that are trained or there are many attempts of training it is easy to loose track of what has been accomplished, which models were already trained and what were the results. 
 Monitoring enables the researcher to have visibility of important metrics for the model. Thus, unsuccessful training may be stopped ahead of time. It also helps to visualize training progress, model output and makes it possible to share the results with other researchers during the training. 
-\paragraph{Tensorboard}
-Tensorboard is an open source project that enables user to locally monitor training of a neural networks. It makes it possible to:
-- gather metrics,
-- visualize model outputs,
-- organize model trainings in the friendly user interface.
+\paragraph{Tensorboard}\mbox{}\\
+\indent Tensorboard\footnote{\url{https://www.tensorflow.org/tensorboard}} is an open source project that enables user to locally monitor training of a neural networks. It makes it possible to:
+\begin{itemize}
+    \item gather metrics,
+    \item visualize model outputs,
+    \item organize model trainings in the friendly user interface.
+\end{itemize}
 
-\paragraph{Wandb}
-Wandb is a commercial product that allows to monitor training of Machine Learning models, especially deep learning ones. W skład monitoringu wchodzi:
-- gathering statistics and metrics
-- comparison of statistics,
-- hardware monitoring,
-- configuration monitoring. 
-- reports of training. 
 
-It can be synchronised with Tensorobard. The metrics logged there can be viewed in the WanDB website. They give researchers from the academia free resources to use. 
+\paragraph{Wandb}\mbox{}\\
+\indent Wandb is a commercial product for monitoring the training of machine learning models. The monitoring includes:
+\begin{itemize}
+    \item collection of statistics and metrics,
+    \item comparison of statistics,
+    \item hardware monitoring,
+    \item configuration monitoring,
+    \item generation of training reports.
+\end{itemize}
 
-Thanks to the tool it was possible to monitor whether model converges or not.
+It can be synchronized with Tensorobard. The metrics logged on the Tensorboard can be viewed on the WanDB website and this option was utilized. Researchers in academia are given free resources to use. This opportunity was used; All experiments were recorded under the project \url{https://wandb.ai/deformer/ct-images}.
 
+Thanks to the tool, it was possible to perform many experiments and describe them properly in this paper. Wandb was also used for online monitoring to check whether a model converges or not, since it would be wasteful to continue to train a model that has already stopped giving meaningful results.
 \newpage
-\subsection{Dataset}
-\paragraph{Data source}
-\paragraph{Data format - DICOM}
-- NII.GZ
-- 
-\paragraph{Data characteristics}
-- count
-- value range
-- number of layers
-\paragraph{Data transformations}
+\subsection{Dataset}\mbox{}\\
+\indent The dataset used to train the neural networks presented below consists of 28 pelvic scans. Each person scanned had diagnosed prostate cancer. All data have undergone an anonymization process.
+\paragraph{Data format}\mbox{}\\
+\indent The entire data set was stored in 28 NifTI files (.nii.gz) in the directory \url{/ravana/d3d_work/micorl/data/ct_images_prostate_32fixed} on the "dose3d" computer, located at the WFiIS Faculty in Kraków.
 
+NIfTI (.nii or .nii.gz) is a file format for storing medical imaging data, especially in neuroimaging. The ".nii.gz" extension indicates a compressed version of the NIfTI file. Unlike DICOM, which stores each image slice separately, NIfTI stores the entire image volume in a single file with metadata. 
+
+\paragraph{Data transformations}\mbox{}\\
+\indent When loading a provisioned dataset for analysis, the CT scan images undergo multiple transformations to prepare them adequately. Initially, a central spatial crop is applied, focusing on the region of interest with dimensions (380,380,0). Next, each scan is resized to a resolution of 128 pixels in width, 128 pixels in height, and 32 layers (128x128x32) due to the graphic card memory constraints during models training. Then the intensity values are scaled to a range of [0, 1], based on specific window level and width parameters. 
+
+As a result, a typical scan has a final shape of (1,128,128,32), corresponding to the (C,H,W,D) format. In certain scenarios, where some models were derived from video models, the scans are reshaped to the (1,32,128,128) format, which corresponds to (C,T,H,W), since a scan could be interpreted as a video.
 \newpage
 \subsection{Chosen approaches}
 % \subsubsection{WGAN}
@@ -60,24 +63,24 @@ Thanks to the tool it was possible to monitor whether model converges or not.
 \newpage
 \subsubsection{Transformers CT: VQVAE + Transformers}
 \input{detailed_engineering/german_vqvae}
-\newpage
 \subsubsection{Medical Diffusion: VQGAN + LDM}
 \input{detailed_engineering/medical_diffusion}
 
+\newpage
 \subsection{Evaluation}
 
-In the table below, autoencoders with their reconstruction quality metrics are presented. 
-In addition, the $LDM$ generation quality was measured in the same way. The generative model is treated as if it were a reconstructor, the same as an autoencoder.
+In the table below, autoencoders with their reconstruction quality measurements are presented. 
+In addition, the Medical Diffusion $LDM$ generation quality was measured.
 
-In order to profesionally evaluate quality of the generated dataset, the FID score should be calculated. Since the FID score is related to images, not scans or videos, each layer has been analyzed separately. 
-A synthetic data set of 28 images (length of the original data set) was created. Then each corresponding layer of scans was analyzed by FID. The mean FID score for each layer in the synthethic dataset is equal to 94.41. 
+In order to evaluate the quality of the generated dataset, the FID score was calculated. Since the FID score is related to images, not scans or videos, each layer has been analyzed separately. 
+A synthetic dataset of 28 images (length of the original data set) was created (Fig. \ref{fig:synthetic-dataset}). Then each corresponding layer of scans was analyzed by FID. The mean FID score for each layer in the synthetic dataset is equal to 77.076. 
 
 The number is high compared to the ones in the VQGAN paper\cite{esser2021tamingtransformershighresolutionimage}. It could be caused by the fact that LDM may not generate the internals of the body in the correct order, as can be seen in the figure \ref{fig:ldm-success-comparison}. However, it should be acknowledged by a radiology specialist or doctor of medicine.
 \begin{table}[h!]
 \centering
-\begin{tabular}{|c|c|c|c}
+\begin{tabular}{|c|c|c|c|}
 \hline
-\textbf{Metric} & VAE & VQVAE1 & Medical Diffusion VQVAE & \\
+\textbf{Metric} & VAE & VQVAE1 & Medical Diffusion VQVAE \\
 \hline
 $\overline{L1}$ & 0.0309 & 0.0212 & 0.0144 \\
 \hline
@@ -88,7 +91,7 @@ $\overline{SSIM}$ & 0.8690 & 0.9399 & 0.9795 \\
 $\overline{LPIPS}$ & 2.2485 & 1.3820 & 0.8898 \\
 \hline
 \end{tabular}
-\caption{Mean metrics of the model on the whole dataset as inputs and their reconstructions.}
+\caption{Mean metrics of each reconstructing model between inputs and produced reconstructions. The entire dataset was used (28 samples).}
 \label{table:metrics}
 \end{table}
 
@@ -107,7 +110,7 @@ $\overline{SSIM}$ & 0.9560 \\
 $\overline{LPIPS}$ & 0.9831 \\
 \hline
 \end{tabular}
-\caption{Generative quality of Medical LDM. Statistics were calculated between $\overline{x}$ and $\overline{\hat{x}}$.}
+\caption{Generative quality of the Medical Diffusion LDM. Statistics were calculated between mean input sample, $\overline{x}$ and mean synthetic sample,   $\overline{\hat{x}}$.}
 \label{table:metrics-ldm}
 \end{table}
 
@@ -115,7 +118,7 @@ $\overline{LPIPS}$ & 0.9831 \\
 \begin{figure}[H]
     \centering
     \includegraphics[width=\linewidth]{reports/mean_true_vs_synthetic_comparison.png}
-    \caption{Top - mean CT scan from the true dataset, mean CT scan from the synthetic dataset, bottom - difference.}
+    \caption{Top - mean CT scan from the input dataset, middle - mean CT scan from the synthetic dataset, bottom - difference.}
     \label{fig:mean_true_synth_diff}
 \end{figure}
 
